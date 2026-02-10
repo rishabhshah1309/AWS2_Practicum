@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Guide Console</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orbit"></div>
+    <div class="bg-grid"></div>
+
+    <header class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">AWS Practicum • Health Guide</p>
+        <h1>End-to-End Patient Episode Console</h1>
+        <p class="lede">
+          Explore synthetic episodes from symptom intake through billing reconciliation
+          and post-visit action plans. Built to mirror the planned AWS pipeline.
+        </p>
+        <div class="hero-actions">
+          <button id="refresh" class="primary">Reload Output Data</button>
+          <a class="ghost" href="#timeline">Jump to Episode Timeline</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="metric">
+          <span class="metric-label">Episodes Generated</span>
+          <span id="totalEpisodes" class="metric-value">--</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Data Source</span>
+          <span class="metric-value mono">outputs/</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Pipeline Status</span>
+          <span id="pipelineStatus" class="metric-value">Waiting for data</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" id="timeline">
+        <div class="panel-header">
+          <div>
+            <h2>Episode Timeline</h2>
+            <p>Pick an episode to view the full workflow outputs.</p>
+          </div>
+          <div class="panel-actions">
+            <input id="search" type="search" placeholder="Search episode id" />
+            <select id="episodeSelect"></select>
+          </div>
+        </div>
+        <div id="episodeMeta" class="meta-grid"></div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h3>Symptom Intake + Triage</h3>
+          <p class="muted">Non-diagnostic triage summary and suggested specialties.</p>
+          <div id="triage" class="card-body"></div>
+        </article>
+        <article class="card">
+          <h3>Provider Matching</h3>
+          <p class="muted">Insurance-aware shortlist for suggested specialties.</p>
+          <div id="providers" class="card-body"></div>
+        </article>
+        <article class="card">
+          <h3>Plain-Language Summary</h3>
+          <p class="muted">Audio + documents summarized for patient readability.</p>
+          <div id="summary" class="card-body"></div>
+        </article>
+        <article class="card">
+          <h3>Structured Extraction</h3>
+          <p class="muted">Structured fields extracted from intake and notes.</p>
+          <div id="extraction" class="card-body"></div>
+        </article>
+        <article class="card">
+          <h3>Consent Review</h3>
+          <p class="muted">Before-you-sign highlights for signatures/consents.</p>
+          <div id="consent" class="card-body"></div>
+        </article>
+        <article class="card">
+          <h3>Billing Reconciliation</h3>
+          <p class="muted">Grouped charges with verification checklist.</p>
+          <div id="billing" class="card-body"></div>
+        </article>
+        <article class="card wide">
+          <h3>Personalized Post-Visit Action Plan</h3>
+          <p class="muted">Tailored checklist and watch-outs based on preferences.</p>
+          <div id="actionPlan" class="card-body"></div>
+        </article>
+        <article class="card wide">
+          <h3>Raw Episode Output</h3>
+          <p class="muted">Full JSON output for the selected episode.</p>
+          <pre id="rawJson" class="code"></pre>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Tip: Run the pipeline first to refresh outputs. Then reload this page.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
