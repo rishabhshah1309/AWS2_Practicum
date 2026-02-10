@@ -44,7 +44,12 @@ python3 scripts/run_local.py
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000/app/` to explore the episode console.
+Open `http://localhost:8000/app/` to explore the full patient console:
+1. Dashboard overview + timeline + episode deep dive
+2. Symptom checker picklist
+3. Legal document intake and parsing (frontend simulated)
+4. Medical data upload for transcription (frontend simulated)
+5. Patient profile summary and next steps
 
 **Outputs**
 Local outputs are written to `outputs/episodes/<episode_id>.json` and include:
