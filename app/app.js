@@ -1,169 +1,400 @@
-const summaryPath = "../outputs/summary.json";
-const indexPath = "../outputs/episodes/index.json";
+const DATASET_BASE = "../Synthetic%20Dataset%20Build/synthetic_dataset";
+const OUTPUT_BASE = "../outputs";
 
-const totalEpisodesEl = document.getElementById("totalEpisodes");
-const pipelineStatusEl = document.getElementById("pipelineStatus");
-const refreshButton = document.getElementById("refresh");
+const dataStatus = document.getElementById("dataStatus");
+const patientSelect = document.getElementById("patientSelect");
 const episodeSelect = document.getElementById("episodeSelect");
-const searchInput = document.getElementById("search");
-const episodeMeta = document.getElementById("episodeMeta");
+const patientSnapshot = document.getElementById("patientSnapshot");
+const patientMetrics = document.getElementById("patientMetrics");
+const patientMeds = document.getElementById("patientMeds");
+const timelineList = document.getElementById("timelineList");
+const episodeDive = document.getElementById("episodeDive");
+const episodeRaw = document.getElementById("episodeRaw");
+const nextStepsEl = document.getElementById("nextSteps");
+const timelineHighlights = document.getElementById("timelineHighlights");
 
-const triageEl = document.getElementById("triage");
-const providersEl = document.getElementById("providers");
-const summaryEl = document.getElementById("summary");
-const extractionEl = document.getElementById("extraction");
-const consentEl = document.getElementById("consent");
-const billingEl = document.getElementById("billing");
-const actionPlanEl = document.getElementById("actionPlan");
-const rawJsonEl = document.getElementById("rawJson");
+const locationOptions = document.getElementById("locationOptions");
+const painOptions = document.getElementById("painOptions");
+const symptomOptions = document.getElementById("symptomOptions");
+const severityOptions = document.getElementById("severityOptions");
+const durationOptions = document.getElementById("durationOptions");
+const runSymptom = document.getElementById("runSymptom");
+const symptomResults = document.getElementById("symptomResults");
 
-let episodes = [];
-let currentEpisode = null;
+const legalUpload = document.getElementById("legalUpload");
+const legalUploadMeta = document.getElementById("legalUploadMeta");
+const legalParse = document.getElementById("legalParse");
 
-const formatList = (items) => {
+const medicalUpload = document.getElementById("medicalUpload");
+const medicalUploadMeta = document.getElementById("medicalUploadMeta");
+const medicalTranscript = document.getElementById("medicalTranscript");
+
+const state = {
+  patients: [],
+  episodesMeta: [],
+  outputs: [],
+  outputById: {},
+};
+
+const rules = {
+  chest: ["Cardiology", "Primary Care"],
+  head: ["Neurology", "Primary Care"],
+  stomach: ["Gastroenterology", "Primary Care"],
+  back: ["Orthopedics", "Primary Care"],
+  joints: ["Orthopedics", "Primary Care"],
+  throat: ["ENT", "Primary Care"],
+};
+
+const renderList = (items) => {
   if (!items || items.length === 0) return "—";
-  return items.map((item) => `• ${item}`).join("\n");
+  return items.map((item) => `• ${item}`).join("<br />");
 };
 
-const buildTags = (items) => {
-  if (!items || items.length === 0) return "—";
-  return items.map((item) => `<span class="tag">${item}</span>`).join(" ");
-};
-
-const renderMeta = (episode) => {
-  const entries = [
-    { label: "Episode", value: episode.episode_id },
-    { label: "Patient", value: episode.patient_id },
-    { label: "Specialties", value: (episode.triage?.suggested_specialties || []).join(", ") },
-    { label: "In Network Only", value: episode.provider_matching?.in_network_only ? "Yes" : "No" },
-  ];
-
-  episodeMeta.innerHTML = entries
-    .map(
-      (entry) => `
-      <div class="meta-pill">
-        <strong>${entry.label}:</strong> ${entry.value || "—"}
-      </div>
-    `
-    )
-    .join("");
-};
-
-const renderEpisode = (episode) => {
-  if (!episode) return;
-
-  triageEl.innerHTML = `
-    <div><strong>Summary:</strong> ${episode.triage?.triage_summary || "—"}</div>
-    <div><strong>Suggested specialties:</strong> ${buildTags(episode.triage?.suggested_specialties)}</div>
-  `;
-
-  const providerRows = (episode.provider_matching?.providers || [])
-    .map(
-      (provider) => `
-      <div>
-        <strong>${provider.provider_id}</strong> • ${provider.specialty} • ${provider.location}
-      </div>
-    `
-    )
-    .join("");
-  providersEl.innerHTML = providerRows || "—";
-
-  summaryEl.innerHTML = `
-    <div>${episode.summary?.plain_language_summary || "—"}</div>
-  `;
-
-  const extraction = episode.structured_extraction || {};
-  extractionEl.innerHTML = `
-    <div><strong>Symptoms:</strong> ${(extraction.symptoms || []).join(", ") || "—"}</div>
-    <div><strong>Severity:</strong> ${extraction.severity || "—"}</div>
-    <div><strong>Duration (days):</strong> ${extraction.duration_days ?? "—"}</div>
-    <div><strong>Medications:</strong> ${(extraction.medications || []).join(", ") || "—"}</div>
-    <div><strong>Tests ordered:</strong> ${(extraction.tests_ordered || []).join(", ") || "—"}</div>
-    <div><strong>Follow-up:</strong> ${extraction.follow_up || "—"}</div>
-  `;
-
-  const consent = episode.consent_review || {};
-  consentEl.innerHTML = `
-    <div><strong>Document:</strong> ${consent.document_type || "—"}</div>
-    <div><strong>Summary:</strong> ${consent.summary || "—"}</div>
-    <div><strong>Before you sign:</strong></div>
-    <pre class="code">${JSON.stringify(consent.before_you_sign || {}, null, 2)}</pre>
-  `;
-
-  const billing = episode.billing_reconciliation || {};
-  billingEl.innerHTML = `
-    <div><strong>Total billed:</strong> ${billing.total_billed ?? "—"}</div>
-    <div><strong>Patient responsibility:</strong> ${billing.patient_responsibility ?? "—"}</div>
-    <div><strong>Checklist:</strong></div>
-    <pre class="code">${formatList(billing.verification_checklist || [])}</pre>
-  `;
-
-  const actionPlan = episode.action_plan || {};
-  actionPlanEl.innerHTML = `
-    <div><strong>Preferred language:</strong> ${actionPlan.preferred_language || "—"}</div>
-    <div><strong>Reminder time:</strong> ${actionPlan.reminder_time || "—"}</div>
-    <div><strong>Checklist:</strong></div>
-    <pre class="code">${formatList(actionPlan.checklist || [])}</pre>
-    <div><strong>Watch-outs:</strong> ${(actionPlan.watch_outs || []).join(", ") || "—"}</div>
-  `;
-
-  rawJsonEl.textContent = JSON.stringify(episode, null, 2);
-  renderMeta(episode);
-};
-
-const loadEpisode = async (filename) => {
-  if (!filename) return;
-  const res = await fetch(`../outputs/episodes/${filename}`);
-  if (!res.ok) {
-    pipelineStatusEl.textContent = "Episode output not found";
-    return;
-  }
-  const data = await res.json();
-  currentEpisode = data;
-  renderEpisode(data);
-};
-
-const filterEpisodes = () => {
-  const query = searchInput.value.trim().toLowerCase();
-  const filtered = episodes.filter((episode) => episode.toLowerCase().includes(query));
-  episodeSelect.innerHTML = filtered
-    .map((episode) => `<option value="${episode}">${episode}</option>`)
-    .join("");
-
-  if (filtered.length > 0) {
-    loadEpisode(filtered[0]);
-  }
+const formatDate = (dateStr) => {
+  if (!dateStr) return "Unknown date";
+  const date = new Date(dateStr + "T00:00:00");
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 };
 
 const loadData = async () => {
-  pipelineStatusEl.textContent = "Loading data...";
   try {
-    const summaryRes = await fetch(summaryPath);
-    const summary = await summaryRes.json();
-    totalEpisodesEl.textContent = summary.total_episodes ?? "—";
+    dataStatus.textContent = "Loading data...";
 
-    const indexRes = await fetch(indexPath);
-    const index = await indexRes.json();
-    episodes = index.episodes || [];
+    const [patientsRes, episodesRes, indexRes] = await Promise.all([
+      fetch(`${DATASET_BASE}/metadata/patients.json`),
+      fetch(`${DATASET_BASE}/metadata/episodes.json`),
+      fetch(`${OUTPUT_BASE}/episodes/index.json`),
+    ]);
 
-    pipelineStatusEl.textContent = episodes.length ? "Ready" : "No episodes found";
+    state.patients = await patientsRes.json();
+    state.episodesMeta = await episodesRes.json();
+    const indexData = await indexRes.json();
 
-    episodeSelect.innerHTML = episodes
-      .map((episode) => `<option value="${episode}">${episode}</option>`)
-      .join("");
+    const outputs = await Promise.all(
+      indexData.episodes.map((file) => fetch(`${OUTPUT_BASE}/episodes/${file}`).then((res) => res.json()))
+    );
 
-    if (episodes.length > 0) {
-      await loadEpisode(episodes[0]);
-    }
+    state.outputs = outputs;
+    state.outputById = Object.fromEntries(outputs.map((ep) => [ep.episode_id, ep]));
+
+    dataStatus.textContent = "Data Ready";
+    hydratePatientSelect();
   } catch (err) {
-    pipelineStatusEl.textContent = "Unable to load outputs";
-    totalEpisodesEl.textContent = "—";
+    dataStatus.textContent = "Data load failed";
     console.error(err);
   }
 };
 
-refreshButton.addEventListener("click", () => loadData());
-searchInput.addEventListener("input", filterEpisodes);
-episodeSelect.addEventListener("change", (event) => loadEpisode(event.target.value));
+const hydratePatientSelect = () => {
+  patientSelect.innerHTML = state.patients
+    .map((patient) => `<option value="${patient.patient_id}">${patient.patient_id}</option>`)
+    .join("");
 
+  if (state.patients.length) {
+    renderPatient(state.patients[0].patient_id);
+  }
+};
+
+const renderPatient = (patientId) => {
+  const patient = state.patients.find((p) => p.patient_id === patientId);
+  const episodesMeta = state.episodesMeta.filter((ep) => ep.patient_id === patientId);
+  const outputs = episodesMeta.map((meta) => ({
+    meta,
+    output: state.outputById[meta.episode_id],
+  })).filter((item) => item.output);
+
+  const sorted = outputs.sort((a, b) => (a.meta.visit_date || "").localeCompare(b.meta.visit_date || ""));
+
+  patientSnapshot.innerHTML = renderList([
+    `Age range: ${patient?.age_range || "—"}`,
+    `Language: ${patient?.language || "—"}`,
+    `Caregiver involved: ${patient?.caregiver ? "Yes" : "No"}`,
+    `Insurance plan: ${patient?.insurance_id || "—"}`,
+  ]);
+
+  const meds = new Set();
+  outputs.forEach(({ output }) => {
+    (output?.structured_extraction?.medications || []).forEach((m) => meds.add(m));
+  });
+
+  patientMetrics.innerHTML = renderList([
+    `Episodes: ${outputs.length}`,
+    `Unique medications: ${meds.size}`,
+    `Latest visit: ${sorted[sorted.length - 1]?.meta.visit_date || "—"}`,
+  ]);
+
+  patientMeds.innerHTML = renderList(meds.size ? Array.from(meds) : ["No medications found"]);
+
+  timelineList.innerHTML = sorted
+    .map(({ meta, output }) => {
+      const symptoms = output?.structured_extraction?.symptoms?.filter(Boolean).join(", ") || "—";
+      return `
+      <div class="timeline-item">
+        <div><span class="tag">${formatDate(meta.visit_date)}</span> ${meta.specialty}</div>
+        <div><strong>Symptoms:</strong> ${symptoms}</div>
+        <div><strong>Provider:</strong> ${meta.provider_id}</div>
+      </div>
+    `;
+    })
+    .join("");
+
+  episodeSelect.innerHTML = sorted
+    .map(({ meta }) => `<option value="${meta.episode_id}">${meta.episode_id}</option>`)
+    .join("");
+
+  if (sorted.length) {
+    renderEpisode(sorted[0].meta.episode_id);
+  }
+
+  renderSummarySection(sorted.map((item) => item.output));
+};
+
+const renderEpisode = (episodeId) => {
+  const output = state.outputById[episodeId];
+  if (!output) return;
+
+  episodeDive.innerHTML = renderList([
+    `Triage: ${output.triage?.triage_summary || "—"}`,
+    `Specialties: ${(output.triage?.suggested_specialties || []).join(", ") || "—"}`,
+    `Provider shortlist: ${(output.provider_matching?.providers || []).length}`,
+    `Summary: ${output.summary?.plain_language_summary || "—"}`,
+    `Consent doc: ${output.consent_review?.document_type || "—"}`,
+    `Billing total: ${output.billing_reconciliation?.total_billed ?? "—"}`,
+  ]);
+
+  episodeRaw.textContent = JSON.stringify(output, null, 2);
+};
+
+const renderSummarySection = (outputs) => {
+  const nextSteps = [];
+  const highlights = [];
+
+  outputs.forEach((output) => {
+    (output.action_plan?.checklist || []).forEach((item) => nextSteps.push(item));
+    const watch = output.action_plan?.watch_outs || [];
+    if (watch.length) highlights.push(`Watch-outs: ${watch.join(", ")}`);
+    if (output.structured_extraction?.follow_up) {
+      highlights.push(`Follow-up: ${output.structured_extraction.follow_up}`);
+    }
+  });
+
+  nextStepsEl.innerHTML = renderList(nextSteps.slice(0, 10));
+  timelineHighlights.innerHTML = renderList(highlights.slice(0, 8));
+};
+
+patientSelect.addEventListener("change", (event) => renderPatient(event.target.value));
+episodeSelect.addEventListener("change", (event) => renderEpisode(event.target.value));
+
+// Symptom checker
+const optionData = {
+  locations: [
+    { key: "head", label: "Head", desc: "Headache, dizziness" },
+    { key: "chest", label: "Chest", desc: "Chest pain, breathing" },
+    { key: "stomach", label: "Stomach", desc: "Nausea, cramps" },
+    { key: "back", label: "Back", desc: "Upper or lower back" },
+    { key: "joints", label: "Joints", desc: "Knee, shoulder" },
+    { key: "throat", label: "Throat & Ears", desc: "Sore throat" },
+  ],
+  pains: [
+    { key: "sharp", label: "Sharp", desc: "Stabbing, intense" },
+    { key: "dull", label: "Dull Ache", desc: "Throbbing, heavy" },
+    { key: "burning", label: "Burning", desc: "Hot, stinging" },
+    { key: "cramping", label: "Cramping", desc: "Tight, spasms" },
+  ],
+  symptoms: [
+    "Chest pain",
+    "Shortness of breath",
+    "Headache",
+    "Nausea",
+    "Fever",
+    "Fatigue",
+    "Dizziness",
+    "Skin rash",
+    "Joint pain",
+    "Cough",
+    "Sore throat",
+    "Abdominal pain",
+  ],
+  severity: [
+    { key: "mild", label: "Mild (1-3)", desc: "Noticeable" },
+    { key: "moderate", label: "Moderate (4-6)", desc: "Affects daily activities" },
+    { key: "severe", label: "Severe (7-10)", desc: "Hard to function" },
+  ],
+  duration: ["Today", "A few days", "About a week", "2+ weeks", "Ongoing"],
+};
+
+const symptomState = {
+  location: null,
+  pain: null,
+  symptoms: new Set(),
+  severity: null,
+  duration: null,
+};
+
+const renderOptions = () => {
+  locationOptions.innerHTML = optionData.locations
+    .map(
+      (item) => `
+      <div class="option-card" data-key="${item.key}" data-group="location">
+        <strong>${item.label}</strong>
+        <span>${item.desc}</span>
+      </div>
+    `
+    )
+    .join("");
+
+  painOptions.innerHTML = optionData.pains
+    .map(
+      (item) => `
+      <div class="option-card" data-key="${item.key}" data-group="pain">
+        <strong>${item.label}</strong>
+        <span>${item.desc}</span>
+      </div>
+    `
+    )
+    .join("");
+
+  symptomOptions.innerHTML = optionData.symptoms
+    .map((item) => `<button type="button" class="pill" data-symptom="${item}">${item}</button>`)
+    .join("");
+
+  severityOptions.innerHTML = optionData.severity
+    .map(
+      (item) => `
+      <div class="severity" data-key="${item.key}">
+        <strong>${item.label}</strong>
+        <div class="muted">${item.desc}</div>
+      </div>
+    `
+    )
+    .join("");
+
+  durationOptions.innerHTML = optionData.duration
+    .map((item) => `<button type="button" class="pill" data-duration="${item}">${item}</button>`)
+    .join("");
+};
+
+const clearActive = (nodes) => nodes.forEach((node) => node.classList.remove("active"));
+
+locationOptions.addEventListener("click", (event) => {
+  const card = event.target.closest(".option-card");
+  if (!card) return;
+  clearActive(locationOptions.querySelectorAll(".option-card"));
+  card.classList.add("active");
+  symptomState.location = card.dataset.key;
+});
+
+painOptions.addEventListener("click", (event) => {
+  const card = event.target.closest(".option-card");
+  if (!card) return;
+  clearActive(painOptions.querySelectorAll(".option-card"));
+  card.classList.add("active");
+  symptomState.pain = card.dataset.key;
+});
+
+symptomOptions.addEventListener("click", (event) => {
+  const pill = event.target.closest(".pill");
+  if (!pill) return;
+  const label = pill.dataset.symptom;
+  if (symptomState.symptoms.has(label)) {
+    symptomState.symptoms.delete(label);
+    pill.classList.remove("active");
+  } else {
+    symptomState.symptoms.add(label);
+    pill.classList.add("active");
+  }
+});
+
+severityOptions.addEventListener("click", (event) => {
+  const card = event.target.closest(".severity");
+  if (!card) return;
+  clearActive(severityOptions.querySelectorAll(".severity"));
+  card.classList.add("active");
+  symptomState.severity = card.dataset.key;
+});
+
+durationOptions.addEventListener("click", (event) => {
+  const pill = event.target.closest(".pill");
+  if (!pill) return;
+  clearActive(durationOptions.querySelectorAll(".pill"));
+  pill.classList.add("active");
+  symptomState.duration = pill.dataset.duration;
+});
+
+runSymptom.addEventListener("click", () => {
+  const symptoms = Array.from(symptomState.symptoms);
+  const location = symptomState.location;
+  const severity = symptomState.severity || "unspecified";
+  const duration = symptomState.duration || "unspecified";
+
+  const specialties = location ? rules[location] || ["Primary Care"] : ["Primary Care"];
+  const emergency = symptoms.includes("Chest pain") && severity === "severe";
+
+  symptomResults.innerHTML = `
+    <div class="card">
+      <h3>Guidance</h3>
+      <div class="stack">
+        <div><strong>Summary:</strong> ${symptoms.join(", ") || "No symptoms selected"}</div>
+        <div><strong>Severity:</strong> ${severity}</div>
+        <div><strong>Duration:</strong> ${duration}</div>
+        <div><strong>Suggested specialties:</strong> ${specialties.join(", ")}</div>
+        ${emergency ? "<div class=\"tag\">Potential emergency — seek immediate care</div>" : ""}
+      </div>
+    </div>
+  `;
+});
+
+// Legal document upload
+legalUpload.addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  legalUploadMeta.innerHTML = renderList([
+    `File: ${file.name}`,
+    `Size: ${(file.size / 1024).toFixed(1)} KB`,
+    `Type: ${file.type || "Unknown"}`,
+  ]);
+
+  if (file.type.startsWith("text/") || file.name.endsWith(".txt")) {
+    const text = await file.text();
+    const clauses = [];
+    if (/consent/i.test(text)) clauses.push("Consent clauses detected");
+    if (/authorization/i.test(text)) clauses.push("Authorization language detected");
+    if (/financial/i.test(text)) clauses.push("Financial responsibility mentioned");
+    if (/hipaa|privacy/i.test(text)) clauses.push("Privacy/HIPAA language detected");
+
+    legalParse.innerHTML = renderList([
+      `Summary: ${text.slice(0, 240)}...`,
+      `Flags: ${clauses.join(", ") || "No key clauses detected"}`,
+      "Missing fields: signature, date (verify manually)",
+    ]);
+  } else {
+    legalParse.innerHTML = renderList([
+      "PDF or scanned document detected.",
+      "OCR + clause extraction queued (simulated).",
+      "Review recommended before signing.",
+    ]);
+  }
+});
+
+// Medical transcription upload
+medicalUpload.addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  medicalUploadMeta.innerHTML = renderList([
+    `File: ${file.name}`,
+    `Size: ${(file.size / 1024).toFixed(1)} KB`,
+    `Type: ${file.type || "Unknown"}`,
+  ]);
+
+  if (file.type.startsWith("audio/")) {
+    medicalTranscript.textContent = "Audio received. Transcription queued (simulated).";
+  } else {
+    const text = await file.text();
+    medicalTranscript.textContent = text.slice(0, 1000);
+  }
+});
+
+renderOptions();
 loadData();

@@ -1,0 +1,2552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clarify Health</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FDFBF7;
+      --bg-secondary: #F5F0E8;
+      --bg-card: #FFFFFF;
+      --text-primary: #2D2A26;
+      --text-secondary: #6B665C;
+      --accent: #2E6B4E;
+      --accent-light: #E8F2EC;
+      --accent-hover: #245A40;
+      --border: #E8E4DC;
+      --warning: #B45309;
+      --warning-light: #FEF3C7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --success: #047857;
+      --success-light: #D1FAE5;
+      --shadow: 0 2px 12px rgba(45, 42, 38, 0.08);
+      --shadow-lg: 0 8px 32px rgba(45, 42, 38, 0.12);
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .help-btn {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .help-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Mode Toggle */
+    .mode-toggle-container {
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .mode-toggle {
+      display: flex;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 0.375rem;
+      gap: 0.375rem;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .mode-btn.active {
+      background: var(--bg-card);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .mode-btn .mode-icon {
+      font-size: 1.25rem;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .progress-step {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    .progress-step.completed {
+      background: var(--accent);
+    }
+
+    .progress-step.active {
+      background: linear-gradient(90deg, var(--accent) 50%, var(--border) 50%);
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ============================================
+       WIZARD MODE STYLES
+       ============================================ */
+    
+    .wizard-mode {
+      display: block;
+    }
+
+    .wizard-mode.hidden {
+      display: none;
+    }
+
+    /* Step Container */
+    .step {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .step-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .step-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Large Selection Cards */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .options-grid.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    .option-card {
+      background: var(--bg-card);
+      border: 3px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-height: 100px;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 4px rgba(46, 107, 78, 0.15);
+    }
+
+    .option-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .option-card.selected .option-icon {
+      background: var(--accent);
+    }
+
+    .option-card.selected .option-icon span {
+      filter: grayscale(1) brightness(10);
+    }
+
+    .option-content {
+      flex: 1;
+    }
+
+    .option-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .option-content p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .option-check {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-card.selected .option-check {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .option-check svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .option-card.selected .option-check svg {
+      opacity: 1;
+    }
+
+    /* Severity Buttons */
+    .severity-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .severity-card {
+      background: var(--bg-card);
+      border: 3px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .severity-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .severity-card.mild:hover,
+    .severity-card.mild.selected {
+      border-color: var(--success);
+      background: var(--success-light);
+    }
+
+    .severity-card.moderate:hover,
+    .severity-card.moderate.selected {
+      border-color: var(--warning);
+      background: var(--warning-light);
+    }
+
+    .severity-card.severe:hover,
+    .severity-card.severe.selected {
+      border-color: var(--danger);
+      background: var(--danger-light);
+    }
+
+    .severity-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .severity-card.mild .severity-number {
+      background: var(--success);
+      color: white;
+    }
+
+    .severity-card.moderate .severity-number {
+      background: var(--warning);
+      color: white;
+    }
+
+    .severity-card.severe .severity-number {
+      background: var(--danger);
+      color: white;
+    }
+
+    .severity-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .severity-content p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Duration Options */
+    .duration-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .duration-card {
+      background: var(--bg-card);
+      border: 3px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+    .duration-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .duration-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .duration-card .check {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .duration-card.selected .check {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .duration-card .check svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+      opacity: 0;
+    }
+
+    .duration-card.selected .check svg {
+      opacity: 1;
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 1.25rem 2rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-back {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-back:hover {
+      background: var(--border);
+    }
+
+    .btn-next {
+      background: var(--accent);
+      border: 2px solid var(--accent);
+      color: white;
+    }
+
+    .btn-next:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-next:disabled {
+      background: var(--border);
+      border-color: var(--border);
+      color: var(--text-secondary);
+      cursor: not-allowed;
+    }
+
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* ============================================
+       CHAT MODE STYLES
+       ============================================ */
+    
+    .chat-mode {
+      display: none;
+      height: calc(100vh - 220px);
+      min-height: 500px;
+      flex-direction: column;
+    }
+
+    .chat-mode.active {
+      display: flex;
+    }
+
+    .chat-container {
+      flex: 1;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 85%;
+      animation: messageIn 0.3s ease-out;
+    }
+
+    @keyframes messageIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+    }
+
+    .message.ai .message-avatar {
+      background: var(--accent-light);
+    }
+
+    .message.user .message-avatar {
+      background: var(--bg-secondary);
+    }
+
+    .message-content {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .message.ai .message-content {
+      background: var(--bg-secondary);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user .message-content {
+      background: var(--accent);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Quick Reply Buttons */
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .quick-reply {
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.625rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-reply:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 1rem 1.25rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+    }
+
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+    }
+
+    /* Chat Input */
+    .chat-input-area {
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .chat-input-wrapper {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-family: inherit;
+      font-size: 1.05rem;
+      resize: none;
+      min-height: 56px;
+      max-height: 150px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--bg-primary);
+    }
+
+    .chat-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .chat-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .btn-send {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-send:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+
+    .btn-send svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    /* Results in Chat */
+    .chat-results {
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .chat-results h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chat-results ul {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .chat-results li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chat-results li:last-child {
+      border-bottom: none;
+    }
+
+    .chat-results .see-more {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .chat-results .see-more:hover {
+      background: var(--accent-hover);
+    }
+
+    /* ============================================
+       RESULTS PAGE STYLES (Shared)
+       ============================================ */
+
+    .results-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: var(--radius) var(--radius) 0 0;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .tab-btn .tab-icon {
+      font-size: 1.25rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Result Cards */
+    .result-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-card p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .result-card.highlight {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Remedy List */
+    .remedy-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .remedy-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .remedy-item:first-child {
+      padding-top: 0;
+    }
+
+    .remedy-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .remedy-text h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .remedy-text p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    /* Medication Tiers */
+    .med-tier {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .med-tier::after {
+      content: '';
+      position: absolute;
+      left: 2rem;
+      bottom: -1rem;
+      width: 4px;
+      height: 1rem;
+      background: var(--border);
+    }
+
+    .med-tier:last-child::after {
+      display: none;
+    }
+
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .tier-1 .tier-badge {
+      background: var(--success-light);
+      color: var(--success);
+    }
+
+    .tier-2 .tier-badge {
+      background: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .tier-3 .tier-badge {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .med-tier h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .med-tier > p {
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .med-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .med-tag {
+      background: var(--bg-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+    }
+
+    .rx-note {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .warning-box h3 {
+      color: var(--danger);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .warning-box p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Provider CTA */
+    .provider-cta {
+      background: var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .provider-cta h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .provider-cta p {
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .provider-cta button {
+      background: white;
+      color: var(--accent);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .provider-cta button:hover {
+      transform: scale(1.02);
+    }
+
+    /* Start Over */
+    .start-over {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .start-over button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* Emergency Alert */
+    .emergency-alert {
+      background: var(--danger);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: white;
+      text-align: center;
+      animation: pulseAlert 2s infinite;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.4); }
+      50% { box-shadow: 0 0 0 15px rgba(185, 28, 28, 0); }
+    }
+
+    .emergency-alert .emergency-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .emergency-alert h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .emergency-alert p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .emergency-alert .call-911 {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: white;
+      color: var(--danger);
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .emergency-alert .call-911:hover {
+      transform: scale(1.05);
+    }
+
+    .emergency-alert .symptoms-detected {
+      background: rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+
+    .emergency-alert .symptoms-detected h4 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .emergency-alert .symptoms-detected ul {
+      list-style: none;
+      margin: 0;
+    }
+
+    .emergency-alert .symptoms-detected li {
+      padding: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .emergency-alert .not-emergency {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+
+    .emergency-alert .not-emergency:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Urgent Warning (non-emergency but escalated) */
+    .urgent-warning {
+      background: var(--warning);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .urgent-warning h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .urgent-warning p {
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .urgent-warning .urgent-action {
+      display: inline-block;
+      background: white;
+      color: var(--warning);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+
+    /* Chat Emergency Card */
+    .chat-emergency {
+      background: var(--danger);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      color: white;
+      margin-top: 0.5rem;
+    }
+
+    .chat-emergency h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chat-emergency p {
+      opacity: 0.95;
+      margin-bottom: 1rem;
+    }
+
+    .chat-emergency a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: var(--danger);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .chat-emergency .dismiss-emergency {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-family: inherit;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .option-card {
+        padding: 1.25rem;
+      }
+
+      .option-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+      }
+
+      .nav-buttons {
+        flex-direction: column-reverse;
+      }
+
+      .results-tabs {
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        flex: 1 1 45%;
+      }
+
+      .mode-toggle {
+        flex-direction: column;
+      }
+
+      .chat-mode {
+        height: calc(100vh - 280px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        Clarify
+      </div>
+      <button class="help-btn">
+        <span>❓</span> Need Help?
+      </button>
+    </div>
+  </header>
+
+  <!-- Mode Toggle -->
+  <div class="mode-toggle-container">
+    <div class="mode-toggle">
+      <button class="mode-btn active" onclick="setMode('wizard')" id="wizardModeBtn">
+        <span class="mode-icon">📋</span>
+        Guided Steps
+      </button>
+      <button class="mode-btn" onclick="setMode('chat')" id="chatModeBtn">
+        <span class="mode-icon">💬</span>
+        Talk to AI Assistant
+      </button>
+    </div>
+  </div>
+
+  <!-- Progress Bar (Wizard Mode) -->
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-bar">
+      <div class="progress-step" id="prog1"></div>
+      <div class="progress-step" id="prog2"></div>
+      <div class="progress-step" id="prog3"></div>
+      <div class="progress-step" id="prog4"></div>
+    </div>
+    <p class="progress-text" id="progressText">Step 1 of 4</p>
+  </div>
+
+  <main>
+    <!-- ============================================
+         WIZARD MODE
+         ============================================ -->
+    <div class="wizard-mode" id="wizardMode">
+      <!-- Step 1: Where does it hurt? -->
+      <div class="step active" id="step1">
+        <div class="step-header">
+          <h1>Where does it hurt?</h1>
+          <p>Select the area that's bothering you most</p>
+        </div>
+
+        <div class="options-grid">
+          <div class="option-card" onclick="selectOption(this, 'location', 'head')">
+            <div class="option-icon"><span>🤕</span></div>
+            <div class="option-content">
+              <h3>Head</h3>
+              <p>Headache, migraine, dizziness</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'location', 'chest')">
+            <div class="option-icon"><span>💗</span></div>
+            <div class="option-content">
+              <h3>Chest</h3>
+              <p>Chest pain, breathing issues</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'location', 'stomach')">
+            <div class="option-icon"><span>🤢</span></div>
+            <div class="option-content">
+              <h3>Stomach</h3>
+              <p>Nausea, cramps, digestion</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'location', 'back')">
+            <div class="option-icon"><span>🔙</span></div>
+            <div class="option-content">
+              <h3>Back</h3>
+              <p>Upper or lower back pain</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'location', 'joints')">
+            <div class="option-icon"><span>🦵</span></div>
+            <div class="option-content">
+              <h3>Joints</h3>
+              <p>Knee, shoulder, hip, elbow</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'location', 'throat')">
+            <div class="option-icon"><span>🗣️</span></div>
+            <div class="option-content">
+              <h3>Throat & Ears</h3>
+              <p>Sore throat, ear pain, cold</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-next" id="next1" onclick="nextStep(2)" disabled>
+            Continue
+            <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: What kind of pain? -->
+      <div class="step" id="step2">
+        <div class="step-header">
+          <h1>What does it feel like?</h1>
+          <p>Choose the description that fits best</p>
+        </div>
+
+        <div class="options-grid">
+          <div class="option-card" onclick="selectOption(this, 'painType', 'sharp')">
+            <div class="option-icon"><span>⚡</span></div>
+            <div class="option-content">
+              <h3>Sharp</h3>
+              <p>Sudden, stabbing, intense</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'painType', 'dull')">
+            <div class="option-icon"><span>🌫️</span></div>
+            <div class="option-content">
+              <h3>Dull Ache</h3>
+              <p>Constant, throbbing, heavy</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'painType', 'burning')">
+            <div class="option-icon"><span>🔥</span></div>
+            <div class="option-content">
+              <h3>Burning</h3>
+              <p>Hot, stinging sensation</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="option-card" onclick="selectOption(this, 'painType', 'cramping')">
+            <div class="option-icon"><span>🤜</span></div>
+            <div class="option-content">
+              <h3>Cramping</h3>
+              <p>Squeezing, tight, spasms</p>
+            </div>
+            <div class="option-check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" onclick="prevStep(1)">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back
+          </button>
+          <button class="btn btn-next" id="next2" onclick="nextStep(3)" disabled>
+            Continue
+            <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: How bad is it? -->
+      <div class="step" id="step3">
+        <div class="step-header">
+          <h1>How bad is the pain?</h1>
+          <p>Be honest — this helps us give better advice</p>
+        </div>
+
+        <div class="severity-options">
+          <div class="severity-card mild" onclick="selectSeverity(this, 'mild')">
+            <div class="severity-number">1-3</div>
+            <div class="severity-content">
+              <h3>Mild</h3>
+              <p>Noticeable but doesn't stop daily activities</p>
+            </div>
+          </div>
+
+          <div class="severity-card moderate" onclick="selectSeverity(this, 'moderate')">
+            <div class="severity-number">4-6</div>
+            <div class="severity-content">
+              <h3>Moderate</h3>
+              <p>Hard to ignore, affects what I can do</p>
+            </div>
+          </div>
+
+          <div class="severity-card severe" onclick="selectSeverity(this, 'severe')">
+            <div class="severity-number">7-10</div>
+            <div class="severity-content">
+              <h3>Severe</h3>
+              <p>Very intense, hard to function normally</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" onclick="prevStep(2)">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back
+          </button>
+          <button class="btn btn-next" id="next3" onclick="nextStep(4)" disabled>
+            Continue
+            <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 4: How long? -->
+      <div class="step" id="step4">
+        <div class="step-header">
+          <h1>How long has this been going on?</h1>
+          <p>Select the closest match</p>
+        </div>
+
+        <div class="duration-options">
+          <div class="duration-card" onclick="selectDuration(this, 'today')">
+            <span>Just started today</span>
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="duration-card" onclick="selectDuration(this, 'days')">
+            <span>A few days</span>
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="duration-card" onclick="selectDuration(this, 'week')">
+            <span>About a week</span>
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="duration-card" onclick="selectDuration(this, 'weeks')">
+            <span>More than 2 weeks</span>
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+
+          <div class="duration-card" onclick="selectDuration(this, 'chronic')">
+            <span>Ongoing / keeps coming back</span>
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" onclick="prevStep(3)">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back
+          </button>
+          <button class="btn btn-next" id="next4" onclick="showResults()" disabled>
+            See My Results
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Emergency Alert Step -->
+      <div class="step" id="stepEmergency">
+        <div class="emergency-alert">
+          <div class="emergency-icon">🚨</div>
+          <h2>This Could Be Serious</h2>
+          <p id="emergencyMessage">Based on your symptoms, you may need immediate medical attention. Please don't wait.</p>
+          
+          <a href="tel:911" class="call-911">
+            📞 Call 911
+          </a>
+          
+          <div class="symptoms-detected">
+            <h4>Symptoms you reported:</h4>
+            <ul id="emergencySymptomsList">
+              <!-- Populated by JS -->
+            </ul>
+          </div>
+          
+          <p style="font-size: 0.95rem; opacity: 0.9;">If you're not sure, it's always better to call and let them evaluate. You can also go directly to your nearest emergency room.</p>
+          
+          <button class="not-emergency" onclick="dismissEmergency()">
+            My symptoms are not this severe — continue
+          </button>
+        </div>
+        
+        <div class="disclaimer" style="margin-top: 1.5rem;">
+          <strong>When in doubt, seek help.</strong> It's always better to be safe. Emergency services would rather respond to a false alarm than miss a real emergency.
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="step" id="stepResults">
+        <div class="step-header">
+          <h1>Your Personalized Guidance</h1>
+          <p>Based on what you told us</p>
+        </div>
+
+        <div class="results-tabs">
+          <button class="tab-btn active" onclick="showTab('home')">
+            <span class="tab-icon">🏠</span>
+            Try at Home
+          </button>
+          <button class="tab-btn" onclick="showTab('meds')">
+            <span class="tab-icon">💊</span>
+            Medications
+          </button>
+          <button class="tab-btn" onclick="showTab('doctor')">
+            <span class="tab-icon">👨‍⚕️</span>
+            See a Doctor
+          </button>
+        </div>
+
+        <!-- Home Remedies Tab -->
+        <div class="tab-content active" id="tab-home">
+          <div class="result-card highlight">
+            <h3>💡 What this might be</h3>
+            <p id="diagnosisSummary">Based on your symptoms, this could be a tension headache or migraine. These are common and usually manageable at home.</p>
+          </div>
+
+          <div class="result-card">
+            <h3>🏠 Things to try first</h3>
+            <div id="remediesList"></div>
+          </div>
+        </div>
+
+        <!-- Medications Tab -->
+        <div class="tab-content" id="tab-meds">
+          <div class="result-card">
+            <h3>💊 Start mild, increase if needed</h3>
+            <p style="margin-bottom: 1rem;">Always follow package directions. If one level doesn't help after a few days, consider the next.</p>
+          </div>
+
+          <div id="medicationsList"></div>
+        </div>
+
+        <!-- See a Doctor Tab -->
+        <div class="tab-content" id="tab-doctor">
+          <div class="warning-box" id="warningBox">
+            <h3>⚠️ Seek immediate care if:</h3>
+            <p id="warningText">You experience sudden severe pain, difficulty breathing, confusion, or symptoms that rapidly worsen.</p>
+          </div>
+
+          <div class="result-card">
+            <h3>🗓️ When to make an appointment</h3>
+            <p id="appointmentAdvice">If home remedies don't help after 3-5 days, or if symptoms get worse, it's time to see a doctor.</p>
+          </div>
+
+          <div class="provider-cta">
+            <h3>Ready to find a doctor?</h3>
+            <p>We can show you in-network providers near you</p>
+            <button onclick="alert('Account creation would open here')">Find Providers Near Me</button>
+          </div>
+        </div>
+
+        <div class="start-over">
+          <button onclick="startOver()">← Start Over</button>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Not medical advice.</strong> This tool provides general information only. Always consult a healthcare professional for diagnosis and treatment.
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         CHAT MODE
+         ============================================ -->
+    <div class="chat-mode" id="chatMode">
+      <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+          <div class="message ai">
+            <div class="message-avatar">🩺</div>
+            <div class="message-content">
+              Hi! I'm here to help you understand what might be going on and what you can do about it. 
+              <br><br>
+              Tell me, <strong>what's bothering you today?</strong> You can describe it in your own words.
+              
+              <div class="quick-replies">
+                <button class="quick-reply" onclick="sendQuickReply('I have a headache')">I have a headache</button>
+                <button class="quick-reply" onclick="sendQuickReply('My stomach hurts')">My stomach hurts</button>
+                <button class="quick-reply" onclick="sendQuickReply('I have back pain')">I have back pain</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="chat-input-wrapper">
+            <textarea 
+              class="chat-input" 
+              id="chatInput" 
+              placeholder="Describe how you're feeling..." 
+              rows="1"
+              onkeydown="handleChatKeydown(event)"
+            ></textarea>
+            <button class="btn-send" onclick="sendChatMessage()">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="disclaimer" style="margin-top: 1rem;">
+        <strong>Not medical advice.</strong> This tool provides general information only. Always consult a healthcare professional for diagnosis and treatment.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ============================================
+    // STATE
+    // ============================================
+    let currentMode = 'wizard';
+    let currentStep = 1;
+    let selections = {
+      location: null,
+      painType: null,
+      severity: null,
+      duration: null
+    };
+    let emergencyDismissed = false;
+    let detectedEmergencySymptoms = [];
+
+    // Chat state
+    let chatState = {
+      step: 'initial', // initial, location, painType, severity, duration, complete
+      location: null,
+      painType: null,
+      severity: null,
+      duration: null,
+      emergencyDismissed: false
+    };
+
+    // ============================================
+    // EMERGENCY SCENARIOS
+    // ============================================
+    const emergencyKeywords = {
+      cardiac: {
+        keywords: ['chest pain', 'chest tight', 'crushing', 'pressure in chest', 'heart', 'arm pain', 'jaw pain', 'sweating', 'cold sweat', 'can\'t breathe', 'short of breath', 'shortness of breath', 'racing heart', 'irregular heartbeat', 'palpitations'],
+        message: 'Your symptoms could indicate a heart attack or serious cardiac event. Time is critical — every minute matters.',
+        symptoms: ['Chest pain or pressure', 'Difficulty breathing', 'Pain radiating to arm or jaw', 'Cold sweats']
+      },
+      stroke: {
+        keywords: ['face droop', 'drooping', 'slurred speech', 'can\'t speak', 'confusion', 'sudden confusion', 'weakness one side', 'numbness face', 'numbness arm', 'numbness leg', 'sudden headache', 'worst headache', 'vision loss', 'sudden vision', 'trouble walking', 'loss of balance', 'dizzy and confused'],
+        message: 'Your symptoms could indicate a stroke. Acting fast can prevent permanent brain damage — "time is brain."',
+        symptoms: ['Face drooping or numbness', 'Arm weakness or numbness', 'Speech difficulty', 'Sudden severe headache', 'Vision problems']
+      },
+      breathing: {
+        keywords: ['can\'t breathe', 'gasping', 'choking', 'lips blue', 'turning blue', 'severe asthma', 'anaphylaxis', 'allergic reaction', 'throat closing', 'swelling throat', 'wheezing bad'],
+        message: 'Severe breathing difficulty is a medical emergency. You need immediate help.',
+        symptoms: ['Severe shortness of breath', 'Gasping for air', 'Throat swelling', 'Blue lips or face']
+      },
+      neurological: {
+        keywords: ['seizure', 'convulsion', 'passed out', 'unconscious', 'fainted and confused', 'sudden dizziness severe', 'room spinning can\'t stand', 'vertigo severe', 'can\'t walk dizzy', 'dizziness and vomiting', 'dizziness and headache', 'sudden numbness', 'sudden weakness'],
+        message: 'These neurological symptoms require immediate evaluation to rule out serious conditions.',
+        symptoms: ['Sudden severe dizziness', 'Loss of consciousness', 'Seizure', 'Sudden numbness or weakness']
+      },
+      abdominal: {
+        keywords: ['vomiting blood', 'blood in vomit', 'black stool', 'bloody stool', 'severe abdominal', 'stomach pain unbearable', 'rigid abdomen', 'abdomen hard'],
+        message: 'Severe abdominal symptoms with blood or extreme pain could indicate internal bleeding or a surgical emergency.',
+        symptoms: ['Vomiting blood', 'Blood in stool', 'Severe abdominal pain', 'Rigid abdomen']
+      }
+    };
+
+    // Urgent (not 911, but same-day care)
+    const urgentKeywords = {
+      dizziness: {
+        keywords: ['dizzy', 'dizziness', 'lightheaded', 'vertigo', 'room spinning', 'balance problem', 'faint', 'nearly fainted'],
+        message: 'Dizziness can have many causes, but persistent or severe dizziness should be evaluated promptly — especially with other symptoms.',
+        recommendation: 'Consider urgent care or same-day doctor visit'
+      },
+      headacheSevere: {
+        keywords: ['worst headache', 'thunderclap', 'sudden severe headache', 'headache and stiff neck', 'headache and fever', 'headache and confusion'],
+        message: 'A sudden, severe headache — especially with neck stiffness or fever — needs same-day evaluation.',
+        recommendation: 'Seek urgent care or ER today'
+      },
+      chestMild: {
+        keywords: ['chest discomfort', 'chest feels weird', 'chest feels off', 'heart flutter'],
+        message: 'Even mild chest symptoms deserve attention. While it may not be an emergency, you should get it checked.',
+        recommendation: 'See a doctor within 24 hours'
+      },
+      infection: {
+        keywords: ['high fever', 'fever 103', 'fever 104', 'shaking chills', 'can\'t keep fluids down', 'dehydrated'],
+        message: 'High fever or signs of severe dehydration need prompt medical attention.',
+        recommendation: 'Seek urgent care today'
+      }
+    };
+
+    // ============================================
+    // RESULTS DATA
+    // ============================================
+    const resultsData = {
+      head: {
+        diagnosis: "Based on your symptoms, this could be a tension headache, migraine, or sinus-related headache. These are very common and usually manageable.",
+        remedies: [
+          { icon: "🌑", title: "Rest in a quiet, dark room", desc: "Close your eyes and relax for 20-30 minutes" },
+          { icon: "💧", title: "Drink water", desc: "Dehydration often causes headaches" },
+          { icon: "🧊", title: "Cold compress on forehead", desc: "Apply for 15 minutes at a time" },
+          { icon: "💆", title: "Gentle neck massage", desc: "Release tension in neck and shoulders" }
+        ],
+        medications: [
+          { tier: 1, name: "Basic Pain Relief", desc: "Try first for mild headaches", meds: ["Acetaminophen (Tylenol)", "Ibuprofen (Advil, Motrin)"], rx: false },
+          { tier: 2, name: "Migraine Formulas", desc: "If basic relief doesn't work", meds: ["Excedrin Migraine", "Advil Migraine"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "Talk to your doctor about", meds: ["Triptans", "Preventive medications"], rx: true }
+        ],
+        warning: "Sudden severe headache (worst of your life), confusion, vision changes, difficulty speaking, weakness on one side, stiff neck with fever",
+        appointment: "If headaches occur more than 2-3 times per week, wake you from sleep, or don't respond to over-the-counter medication."
+      },
+      chest: {
+        diagnosis: "Chest discomfort can have many causes including muscle strain, acid reflux, or anxiety. However, chest pain should always be taken seriously.",
+        remedies: [
+          { icon: "🛋️", title: "Rest and avoid strain", desc: "Don't lift heavy objects or exercise" },
+          { icon: "🍽️", title: "Eat smaller meals", desc: "If it feels like heartburn, avoid lying down after eating" },
+          { icon: "🧘", title: "Deep breathing exercises", desc: "Can help if anxiety-related" },
+          { icon: "🌡️", title: "Apply heat if muscular", desc: "Warm compress on chest wall" }
+        ],
+        medications: [
+          { tier: 1, name: "Antacids", desc: "For heartburn and acid reflux", meds: ["Tums", "Rolaids", "Maalox"], rx: false },
+          { tier: 2, name: "Acid Reducers", desc: "For persistent reflux", meds: ["Famotidine (Pepcid)", "Omeprazole (Prilosec)"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "If symptoms persist", meds: ["Prescription PPIs", "Cardiac evaluation"], rx: true }
+        ],
+        warning: "Crushing or squeezing pain, pain spreading to arm/jaw/back, shortness of breath, cold sweats, nausea — CALL 911 IMMEDIATELY",
+        appointment: "Any new chest pain should be evaluated by a doctor, especially if you're over 40 or have heart disease risk factors."
+      },
+      stomach: {
+        diagnosis: "Your symptoms suggest digestive upset, which could be from food, stress, or a mild stomach bug. Most stomach issues resolve on their own.",
+        remedies: [
+          { icon: "🍵", title: "Sip ginger or peppermint tea", desc: "Helps settle the stomach" },
+          { icon: "🍌", title: "Try the BRAT diet", desc: "Bananas, rice, applesauce, toast" },
+          { icon: "💧", title: "Stay hydrated", desc: "Small sips of water or clear fluids" },
+          { icon: "🌡️", title: "Heating pad on belly", desc: "Can help with cramping" }
+        ],
+        medications: [
+          { tier: 1, name: "Basic Relief", desc: "For gas and mild upset", meds: ["Gas-X", "Tums", "Pepto-Bismol"], rx: false },
+          { tier: 2, name: "Symptom-Specific", desc: "Based on your symptoms", meds: ["Imodium (diarrhea)", "MiraLAX (constipation)"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "For chronic issues", meds: ["Antispasmodics", "Prescription acid blockers"], rx: true }
+        ],
+        warning: "Severe abdominal pain, blood in stool or vomit, high fever, inability to keep any fluids down for 24+ hours",
+        appointment: "If symptoms last more than a week, you're losing weight unintentionally, or you see blood in your stool."
+      },
+      back: {
+        diagnosis: "Back pain is extremely common and usually caused by muscle strain or poor posture. Most cases improve significantly within a few weeks.",
+        remedies: [
+          { icon: "🧊", title: "Ice for first 48 hours", desc: "20 minutes on, 20 minutes off" },
+          { icon: "🌡️", title: "Switch to heat after 48 hours", desc: "Helps relax tight muscles" },
+          { icon: "🚶", title: "Keep moving gently", desc: "Short walks are better than bed rest" },
+          { icon: "🛏️", title: "Sleep on your side", desc: "With a pillow between your knees" }
+        ],
+        medications: [
+          { tier: 1, name: "OTC Pain Relievers", desc: "For pain and inflammation", meds: ["Ibuprofen (Advil)", "Naproxen (Aleve)"], rx: false },
+          { tier: 2, name: "Topical Treatments", desc: "Applied directly to back", meds: ["Voltaren Gel", "Icy Hot", "Biofreeze"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "If OTC doesn't help", meds: ["Muscle relaxants", "Physical therapy"], rx: true }
+        ],
+        warning: "Numbness in legs or groin, loss of bladder/bowel control, severe weakness, or pain after a fall or injury",
+        appointment: "If pain shoots down your leg, doesn't improve after 2 weeks, or is accompanied by unexplained weight loss."
+      },
+      joints: {
+        diagnosis: "Joint pain often comes from overuse, minor injury, or early arthritis. Rest and anti-inflammatory treatment usually helps.",
+        remedies: [
+          { icon: "🧊", title: "Ice the joint", desc: "15-20 minutes several times daily" },
+          { icon: "🩹", title: "Compress and elevate", desc: "If there's swelling" },
+          { icon: "🚶", title: "Gentle range of motion", desc: "Keep the joint moving but don't push through pain" },
+          { icon: "🛋️", title: "Rest from aggravating activities", desc: "Avoid what makes it worse" }
+        ],
+        medications: [
+          { tier: 1, name: "Anti-Inflammatory", desc: "Reduces pain and swelling", meds: ["Ibuprofen (Advil)", "Naproxen (Aleve)"], rx: false },
+          { tier: 2, name: "Topical Options", desc: "For localized relief", meds: ["Voltaren Gel", "Aspercreme"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "For chronic joint issues", meds: ["Prescription NSAIDs", "Cortisone injections", "Physical therapy"], rx: true }
+        ],
+        warning: "Joint is hot, red, and very swollen; you can't put any weight on it; or you had a significant injury",
+        appointment: "If swelling doesn't go down, the joint feels unstable, or pain persists more than 2 weeks."
+      },
+      throat: {
+        diagnosis: "Sore throat and ear pain are often from viral infections (colds) and improve on their own. Bacterial infections may need antibiotics.",
+        remedies: [
+          { icon: "🍵", title: "Warm liquids", desc: "Tea with honey soothes the throat" },
+          { icon: "🧂", title: "Salt water gargle", desc: "1/4 tsp salt in 8oz warm water" },
+          { icon: "🍬", title: "Throat lozenges", desc: "Keep throat moist" },
+          { icon: "💨", title: "Use a humidifier", desc: "Adds moisture to dry air" }
+        ],
+        medications: [
+          { tier: 1, name: "Pain & Fever Relief", desc: "For comfort", meds: ["Acetaminophen (Tylenol)", "Ibuprofen (Advil)"], rx: false },
+          { tier: 2, name: "Targeted Relief", desc: "For specific symptoms", meds: ["Chloraseptic spray", "Decongestants", "Cough suppressants"], rx: false },
+          { tier: 3, name: "Prescription Options", desc: "If bacterial infection suspected", meds: ["Antibiotics (if strep)", "Prescription ear drops"], rx: true }
+        ],
+        warning: "Difficulty breathing or swallowing, drooling, severe neck stiffness, or a rash with fever",
+        appointment: "If sore throat lasts more than a week, you have white patches on tonsils, or fever over 101°F for more than 2 days."
+      }
+    };
+
+    // ============================================
+    // EMERGENCY DETECTION
+    // ============================================
+    function checkForEmergency(text) {
+      const lower = text.toLowerCase();
+      
+      for (const [type, data] of Object.entries(emergencyKeywords)) {
+        for (const keyword of data.keywords) {
+          if (lower.includes(keyword)) {
+            return {
+              isEmergency: true,
+              type: type,
+              message: data.message,
+              symptoms: data.symptoms
+            };
+          }
+        }
+      }
+      return { isEmergency: false };
+    }
+
+    function checkForUrgent(text) {
+      const lower = text.toLowerCase();
+      
+      for (const [type, data] of Object.entries(urgentKeywords)) {
+        for (const keyword of data.keywords) {
+          if (lower.includes(keyword)) {
+            return {
+              isUrgent: true,
+              type: type,
+              message: data.message,
+              recommendation: data.recommendation
+            };
+          }
+        }
+      }
+      return { isUrgent: false };
+    }
+
+    function checkWizardEmergency() {
+      // Check combinations that indicate emergency
+      if (emergencyDismissed) return false;
+      
+      const location = selections.location;
+      const severity = selections.severity;
+      const painType = selections.painType;
+      
+      // Chest + Severe = Emergency
+      if (location === 'chest' && severity === 'severe') {
+        detectedEmergencySymptoms = ['Severe chest pain', 'This combination of symptoms requires immediate evaluation'];
+        return {
+          isEmergency: true,
+          message: 'Severe chest pain can indicate a heart attack or other serious condition. Please seek immediate medical attention.',
+          symptoms: ['Severe chest pain']
+        };
+      }
+      
+      // Chest + Sharp = Urgent/Possible Emergency
+      if (location === 'chest' && painType === 'sharp') {
+        detectedEmergencySymptoms = ['Sharp chest pain'];
+        return {
+          isEmergency: true,
+          message: 'Sharp chest pain should be evaluated immediately to rule out serious cardiac or pulmonary conditions.',
+          symptoms: ['Sharp chest pain']
+        };
+      }
+      
+      // Head + Severe = Possible emergency (stroke, aneurysm)
+      if (location === 'head' && severity === 'severe') {
+        detectedEmergencySymptoms = ['Severe headache'];
+        return {
+          isEmergency: true,
+          message: 'A sudden, severe headache — especially if it\'s the worst you\'ve ever had — could indicate a stroke or aneurysm.',
+          symptoms: ['Severe headache']
+        };
+      }
+      
+      return { isEmergency: false };
+    }
+
+    function showEmergencyStep(emergencyData) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('stepEmergency').classList.add('active');
+      
+      document.getElementById('emergencyMessage').textContent = emergencyData.message;
+      document.getElementById('emergencySymptomsList').innerHTML = 
+        emergencyData.symptoms.map(s => `<li>⚠️ ${s}</li>`).join('');
+      
+      // Update progress to show we've escalated
+      document.getElementById('progressText').textContent = '⚠️ Urgent Alert';
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`prog${i}`).classList.remove('completed', 'active');
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function dismissEmergency() {
+      emergencyDismissed = true;
+      chatState.emergencyDismissed = true;
+      
+      // Return to where they were in the wizard
+      document.getElementById('stepEmergency').classList.remove('active');
+      
+      // If they had completed selections, show results
+      if (selections.duration) {
+        showResults();
+      } else if (selections.severity) {
+        document.getElementById('step4').classList.add('active');
+        currentStep = 4;
+      } else if (selections.painType) {
+        document.getElementById('step3').classList.add('active');
+        currentStep = 3;
+      } else if (selections.location) {
+        document.getElementById('step2').classList.add('active');
+        currentStep = 2;
+      } else {
+        document.getElementById('step1').classList.add('active');
+        currentStep = 1;
+      }
+      
+      updateProgress();
+    }
+
+    // ============================================
+    // MODE SWITCHING
+    // ============================================
+    function setMode(mode) {
+      currentMode = mode;
+      
+      document.getElementById('wizardModeBtn').classList.toggle('active', mode === 'wizard');
+      document.getElementById('chatModeBtn').classList.toggle('active', mode === 'chat');
+      
+      document.getElementById('wizardMode').classList.toggle('hidden', mode !== 'wizard');
+      document.getElementById('chatMode').classList.toggle('active', mode === 'chat');
+      document.getElementById('progressContainer').style.display = mode === 'wizard' ? 'block' : 'none';
+    }
+
+    // ============================================
+    // WIZARD MODE FUNCTIONS
+    // ============================================
+    function selectOption(element, category, value) {
+      element.parentElement.querySelectorAll('.option-card').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selections[category] = value;
+      document.getElementById(`next${currentStep}`).disabled = false;
+    }
+
+    function selectSeverity(element, value) {
+      document.querySelectorAll('.severity-card').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selections.severity = value;
+      document.getElementById('next3').disabled = false;
+    }
+
+    function selectDuration(element, value) {
+      document.querySelectorAll('.duration-card').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selections.duration = value;
+      document.getElementById('next4').disabled = false;
+    }
+
+    function nextStep(step) {
+      // Check for emergency conditions before proceeding
+      if (!emergencyDismissed) {
+        const emergency = checkWizardEmergency();
+        if (emergency.isEmergency) {
+          showEmergencyStep(emergency);
+          return;
+        }
+      }
+      
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById(`step${step}`).classList.add('active');
+      currentStep = step;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevStep(step) {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById(`step${step}`).classList.add('active');
+      currentStep = step;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress() {
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`prog${i}`);
+        el.classList.remove('completed', 'active');
+        if (i < currentStep) {
+          el.classList.add('completed');
+        } else if (i === currentStep) {
+          el.classList.add('active');
+        }
+      }
+      
+      if (currentStep <= 4) {
+        document.getElementById('progressText').textContent = `Step ${currentStep} of 4`;
+      } else {
+        document.getElementById('progressText').textContent = 'Your Results';
+      }
+    }
+
+    function showResults() {
+      document.getElementById('step4').classList.remove('active');
+      document.getElementById('stepResults').classList.add('active');
+      
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`prog${i}`).classList.add('completed');
+        document.getElementById(`prog${i}`).classList.remove('active');
+      }
+      document.getElementById('progressText').textContent = 'Your Results';
+      
+      populateResults(selections.location);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function populateResults(location) {
+      const data = resultsData[location] || resultsData.head;
+      
+      // Add urgent banner for chest conditions
+      let urgentBannerHTML = '';
+      if (location === 'chest') {
+        urgentBannerHTML = `
+          <div class="urgent-warning">
+            <h3>⚠️ Important Safety Note</h3>
+            <p>Chest symptoms can sometimes indicate serious heart or lung conditions. While your symptoms may not be an emergency right now, please monitor them closely.</p>
+            <a href="tel:911" class="urgent-action">If symptoms worsen → Call 911</a>
+          </div>
+        `;
+      }
+      
+      document.getElementById('diagnosisSummary').textContent = data.diagnosis;
+      
+      // Add urgent banner before remedies if applicable
+      const remediesHTML = data.remedies.map(r => `
+        <div class="remedy-item">
+          <div class="remedy-icon">${r.icon}</div>
+          <div class="remedy-text">
+            <h4>${r.title}</h4>
+            <p>${r.desc}</p>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('remediesList').innerHTML = urgentBannerHTML + remediesHTML;
+      
+      document.getElementById('medicationsList').innerHTML = data.medications.map(m => `
+        <div class="med-tier tier-${m.tier}">
+          <div class="tier-badge">Step ${m.tier}${m.rx ? ' • Prescription' : ' • Over-the-counter'}</div>
+          <h3>${m.name}</h3>
+          <p>${m.desc}</p>
+          <div class="med-examples">
+            ${m.meds.map(med => `<span class="med-tag">${med}</span>`).join('')}
+          </div>
+          ${m.rx ? '<p class="rx-note">⚕️ Requires a doctor\'s prescription</p>' : ''}
+        </div>
+      `).join('');
+      
+      document.getElementById('warningText').textContent = data.warning;
+      document.getElementById('appointmentAdvice').textContent = data.appointment;
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      
+      document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+    }
+
+    function startOver() {
+      currentStep = 1;
+      selections = { location: null, painType: null, severity: null, duration: null };
+      emergencyDismissed = false;
+      detectedEmergencySymptoms = [];
+      
+      document.querySelectorAll('.option-card, .severity-card, .duration-card').forEach(el => {
+        el.classList.remove('selected');
+      });
+      
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`next${i}`);
+        if (btn) btn.disabled = true;
+      }
+      
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('step1').classList.add('active');
+      
+      updateProgress();
+      showTab('home');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // CHAT MODE FUNCTIONS
+    // ============================================
+    function addChatMessage(content, isUser = false, includeQuickReplies = null) {
+      const messagesContainer = document.getElementById('chatMessages');
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+      
+      let quickRepliesHTML = '';
+      if (includeQuickReplies && !isUser) {
+        quickRepliesHTML = `
+          <div class="quick-replies">
+            ${includeQuickReplies.map(r => `<button class="quick-reply" onclick="sendQuickReply('${r}')">${r}</button>`).join('')}
+          </div>
+        `;
+      }
+      
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${isUser ? '👤' : '🩺'}</div>
+        <div class="message-content">
+          ${content}
+          ${quickRepliesHTML}
+        </div>
+      `;
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+      const messagesContainer = document.getElementById('chatMessages');
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message ai';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `
+        <div class="message-avatar">🩺</div>
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const typing = document.getElementById('typingIndicator');
+      if (typing) typing.remove();
+    }
+
+    function detectLocation(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes('head') || lower.includes('migraine') || lower.includes('dizzy') || lower.includes('dizziness') || lower.includes('vertigo') || lower.includes('lightheaded')) return 'head';
+      if (lower.includes('chest') || lower.includes('heart') || lower.includes('breath')) return 'chest';
+      if (lower.includes('stomach') || lower.includes('belly') || lower.includes('nausea') || lower.includes('digest') || lower.includes('abdomen')) return 'stomach';
+      if (lower.includes('back')) return 'back';
+      if (lower.includes('joint') || lower.includes('knee') || lower.includes('shoulder') || lower.includes('hip') || lower.includes('elbow') || lower.includes('ankle') || lower.includes('wrist')) return 'joints';
+      if (lower.includes('throat') || lower.includes('ear') || lower.includes('cold') || lower.includes('sore')) return 'throat';
+      return null;
+    }
+
+    function detectPainType(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes('sharp') || lower.includes('stab') || lower.includes('sudden')) return 'sharp';
+      if (lower.includes('dull') || lower.includes('ache') || lower.includes('throb')) return 'dull';
+      if (lower.includes('burn') || lower.includes('sting') || lower.includes('hot')) return 'burning';
+      if (lower.includes('cramp') || lower.includes('squeeze') || lower.includes('tight')) return 'cramping';
+      return null;
+    }
+
+    function detectSeverity(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes('mild') || lower.includes('little') || lower.includes('slight') || lower.includes('not too bad') || /\b[1-3]\b/.test(lower)) return 'mild';
+      if (lower.includes('moderate') || lower.includes('medium') || lower.includes('pretty bad') || /\b[4-6]\b/.test(lower)) return 'moderate';
+      if (lower.includes('severe') || lower.includes('intense') || lower.includes('terrible') || lower.includes('worst') || /\b[7-9]\b/.test(lower) || lower.includes('10')) return 'severe';
+      return null;
+    }
+
+    function detectDuration(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes('just') || lower.includes('today') || lower.includes('hour') || lower.includes('started')) return 'today';
+      if (lower.includes('few days') || lower.includes('couple days') || lower.includes('2 days') || lower.includes('3 days')) return 'days';
+      if (lower.includes('week') && !lower.includes('weeks')) return 'week';
+      if (lower.includes('weeks') || lower.includes('2 week') || lower.includes('month')) return 'weeks';
+      if (lower.includes('chronic') || lower.includes('always') || lower.includes('ongoing') || lower.includes('long time') || lower.includes('keeps coming')) return 'chronic';
+      return null;
+    }
+
+    function processChatMessage(text) {
+      showTypingIndicator();
+      
+      setTimeout(() => {
+        hideTypingIndicator();
+        
+        // FIRST: Check for emergency keywords
+        if (!chatState.emergencyDismissed) {
+          const emergency = checkForEmergency(text);
+          if (emergency.isEmergency) {
+            showChatEmergency(emergency);
+            return;
+          }
+          
+          // Check for urgent (non-911) situations
+          const urgent = checkForUrgent(text);
+          if (urgent.isUrgent) {
+            showChatUrgent(urgent);
+            // Continue with normal flow after showing warning
+          }
+        }
+        
+        // Try to extract info from message
+        const location = detectLocation(text);
+        const painType = detectPainType(text);
+        const severity = detectSeverity(text);
+        const duration = detectDuration(text);
+        
+        // Update chat state with any detected info
+        if (location) chatState.location = location;
+        if (painType) chatState.painType = painType;
+        if (severity) chatState.severity = severity;
+        if (duration) chatState.duration = duration;
+        
+        // Check for emergency based on combinations (e.g., chest + severe)
+        if (!chatState.emergencyDismissed && chatState.location && chatState.severity) {
+          if ((chatState.location === 'chest' && chatState.severity === 'severe') ||
+              (chatState.location === 'chest' && chatState.painType === 'sharp') ||
+              (chatState.location === 'head' && chatState.severity === 'severe')) {
+            showChatEmergency({
+              message: chatState.location === 'chest' 
+                ? 'Severe or sharp chest pain needs immediate evaluation. This could be your heart.'
+                : 'A severe headache could indicate something serious like a stroke or aneurysm.',
+              symptoms: chatState.location === 'chest'
+                ? ['Severe chest pain', 'Potential cardiac event']
+                : ['Severe headache', 'Potential neurological emergency']
+            });
+            return;
+          }
+        }
+        
+        // Determine what to ask next
+        if (!chatState.location) {
+          addChatMessage(
+            "I want to make sure I understand. <strong>Where exactly are you feeling this?</strong>",
+            false,
+            ['Head', 'Chest', 'Stomach', 'Back', 'Joints', 'Throat']
+          );
+          chatState.step = 'location';
+        } else if (!chatState.painType) {
+          addChatMessage(
+            `Got it, you're having trouble with your <strong>${chatState.location}</strong>. Can you describe <strong>what the pain feels like?</strong>`,
+            false,
+            ['Sharp/stabbing', 'Dull ache', 'Burning', 'Cramping']
+          );
+          chatState.step = 'painType';
+        } else if (!chatState.severity) {
+          addChatMessage(
+            `I understand. <strong>How bad is the pain</strong> on a scale of 1-10?`,
+            false,
+            ['Mild (1-3)', 'Moderate (4-6)', 'Severe (7-10)']
+          );
+          chatState.step = 'severity';
+        } else if (!chatState.duration) {
+          addChatMessage(
+            `Thanks for sharing that. <strong>How long have you been experiencing this?</strong>`,
+            false,
+            ['Just today', 'A few days', 'About a week', '2+ weeks', 'Ongoing']
+          );
+          chatState.step = 'duration';
+        } else {
+          // We have all the info, show results
+          showChatResults();
+          chatState.step = 'complete';
+        }
+      }, 1000);
+    }
+
+    function showChatEmergency(emergency) {
+      const emergencyHTML = `
+        <div class="chat-emergency">
+          <h4>🚨 This sounds serious</h4>
+          <p>${emergency.message}</p>
+          <a href="tel:911">📞 Call 911 Now</a>
+          <button class="dismiss-emergency" onclick="dismissChatEmergency()">My symptoms aren't this severe</button>
+        </div>
+      `;
+      addChatMessage(emergencyHTML);
+    }
+
+    function showChatUrgent(urgent) {
+      const urgentHTML = `
+        <div style="background: var(--warning-light); border: 2px solid var(--warning); border-radius: var(--radius); padding: 1rem; margin-top: 0.5rem;">
+          <strong style="color: var(--warning);">⚠️ ${urgent.recommendation}</strong>
+          <p style="margin: 0.5rem 0 0; font-size: 0.95rem;">${urgent.message}</p>
+        </div>
+      `;
+      addChatMessage(urgentHTML);
+    }
+
+    function dismissChatEmergency() {
+      chatState.emergencyDismissed = true;
+      addChatMessage(
+        "Okay, let's continue. But please keep the warning in mind — if your symptoms worsen, don't hesitate to call 911.<br><br>Now, where were we? <strong>Tell me more about what you're experiencing.</strong>",
+        false,
+        chatState.location ? null : ['Head', 'Chest', 'Stomach', 'Back', 'Joints', 'Throat']
+      );
+    }
+
+    function showChatResults() {
+      const data = resultsData[chatState.location] || resultsData.head;
+      
+      const resultsHTML = `
+        I've gathered enough information. Here's what I found:
+        
+        <div class="chat-results">
+          <h4>💡 What this might be</h4>
+          <p style="margin-bottom: 1rem; color: var(--text-secondary);">${data.diagnosis}</p>
+          
+          <h4>🏠 Try at home</h4>
+          <ul>
+            ${data.remedies.slice(0, 3).map(r => `<li>${r.icon} <strong>${r.title}</strong></li>`).join('')}
+          </ul>
+          
+          <h4>💊 OTC medications to consider</h4>
+          <ul>
+            ${data.medications[0].meds.map(m => `<li>💊 ${m}</li>`).join('')}
+          </ul>
+          
+          <button class="see-more" onclick="switchToWizardResults()">See Full Details (Home Remedies, All Medications, Warning Signs)</button>
+        </div>
+      `;
+      
+      addChatMessage(resultsHTML);
+      
+      // Add follow-up
+      setTimeout(() => {
+        addChatMessage(
+          "Is there anything specific you'd like to know more about? I can explain the remedies, medications, or warning signs in more detail.",
+          false,
+          ['Tell me more about remedies', 'What medications should I take?', 'When should I see a doctor?', 'Find a provider near me']
+        );
+      }, 500);
+    }
+
+    function switchToWizardResults() {
+      // Transfer chat state to wizard selections
+      selections.location = chatState.location;
+      selections.painType = chatState.painType;
+      selections.severity = chatState.severity;
+      selections.duration = chatState.duration;
+      
+      // Switch to wizard mode and show results
+      setMode('wizard');
+      
+      // Show results step
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('stepResults').classList.add('active');
+      
+      // Update progress
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`prog${i}`).classList.add('completed');
+      }
+      document.getElementById('progressText').textContent = 'Your Results';
+      
+      populateResults(selections.location);
+    }
+
+    function sendQuickReply(text) {
+      addChatMessage(text, true);
+      processChatMessage(text);
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      addChatMessage(text, true);
+      input.value = '';
+      input.style.height = 'auto';
+      
+      processChatMessage(text);
+    }
+
+    function handleChatKeydown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChatMessage();
+      }
+    }
+
+    // Auto-resize chat input
+    document.getElementById('chatInput').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+    });
+
+    // Initialize
+    updateProgress();
+  </script>
+</body>
+</html>
