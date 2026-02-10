@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_977e4612",
+    "bill_type": "Professional Fee",
+    "amount": 1052.99,
+    "date_of_service": "2026-01-13"
+  },
+  {
+    "episode_id": "episode_977e4612",
+    "bill_type": "Facility Fee",
+    "amount": 1037.38,
+    "date_of_service": "2026-01-13"
+  },
+  {
+    "episode_id": "episode_977e4612",
+    "bill_type": "Anesthesia",
+    "amount": 305.8,
+    "date_of_service": "2026-01-13"
+  }
+]

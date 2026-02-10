@@ -1,0 +1,26 @@
+[
+  {
+    "episode_id": "episode_5ad822fd",
+    "bill_type": "Professional Fee",
+    "amount": 296.37,
+    "date_of_service": "2025-11-16"
+  },
+  {
+    "episode_id": "episode_5ad822fd",
+    "bill_type": "Laboratory",
+    "amount": 202.16,
+    "date_of_service": "2025-11-16"
+  },
+  {
+    "episode_id": "episode_5ad822fd",
+    "bill_type": "Imaging",
+    "amount": 1125.84,
+    "date_of_service": "2025-11-16"
+  },
+  {
+    "episode_id": "episode_5ad822fd",
+    "bill_type": "Anesthesia",
+    "amount": 706.7,
+    "date_of_service": "2025-11-16"
+  }
+]

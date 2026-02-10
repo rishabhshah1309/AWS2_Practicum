@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_05a010a9",
+    "bill_type": "Imaging",
+    "amount": 1090.56,
+    "date_of_service": "2026-01-27"
+  },
+  {
+    "episode_id": "episode_05a010a9",
+    "bill_type": "Anesthesia",
+    "amount": 721.69,
+    "date_of_service": "2026-01-27"
+  }
+]

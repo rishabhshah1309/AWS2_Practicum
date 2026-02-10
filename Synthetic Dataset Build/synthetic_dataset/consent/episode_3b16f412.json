@@ -1,0 +1,12 @@
+{
+  "episode_id": "episode_3b16f412",
+  "document_type": "HIPAA Authorization",
+  "clauses": [
+    "You may be financially responsible for uncovered services.",
+    "This authorization may be revoked at any time in writing."
+  ],
+  "missing_fields": [
+    "provider signature",
+    "date"
+  ]
+}

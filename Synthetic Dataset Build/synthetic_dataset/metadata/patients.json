@@ -1,0 +1,177 @@
+[
+  {
+    "patient_id": "patient_10786715",
+    "age_range": "18-30",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_a6accd69"
+  },
+  {
+    "patient_id": "patient_8f9cc34c",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_980e5d5a"
+  },
+  {
+    "patient_id": "patient_476fa124",
+    "age_range": "18-30",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_d6fef87d"
+  },
+  {
+    "patient_id": "patient_59e4b178",
+    "age_range": "18-30",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_89a72617"
+  },
+  {
+    "patient_id": "patient_b69bf7d9",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_fa58a11a"
+  },
+  {
+    "patient_id": "patient_2aac6a18",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_afe880a4"
+  },
+  {
+    "patient_id": "patient_9160b88e",
+    "age_range": "60+",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_7bd495ab"
+  },
+  {
+    "patient_id": "patient_bc3d2446",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": false,
+    "insurance_id": "plan_314ef033"
+  },
+  {
+    "patient_id": "patient_f67aa742",
+    "age_range": "46-60",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_e08455a5"
+  },
+  {
+    "patient_id": "patient_6b4bca10",
+    "age_range": "46-60",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_964ea12b"
+  },
+  {
+    "patient_id": "patient_911306b2",
+    "age_range": "60+",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_e6a44d0b"
+  },
+  {
+    "patient_id": "patient_03e1ce94",
+    "age_range": "46-60",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_09918b15"
+  },
+  {
+    "patient_id": "patient_73869b8f",
+    "age_range": "60+",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_d3369afe"
+  },
+  {
+    "patient_id": "patient_dcb3baec",
+    "age_range": "18-30",
+    "language": "Spanish",
+    "caregiver": false,
+    "insurance_id": "plan_95a97e08"
+  },
+  {
+    "patient_id": "patient_1e1a0a04",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_4083a9b0"
+  },
+  {
+    "patient_id": "patient_daf87a11",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_369f7d36"
+  },
+  {
+    "patient_id": "patient_c96068a7",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_74237826"
+  },
+  {
+    "patient_id": "patient_cfa21f24",
+    "age_range": "46-60",
+    "language": "Spanish",
+    "caregiver": false,
+    "insurance_id": "plan_449bbd82"
+  },
+  {
+    "patient_id": "patient_d4498a97",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": false,
+    "insurance_id": "plan_ad3c1862"
+  },
+  {
+    "patient_id": "patient_5058f862",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_c823b8ca"
+  },
+  {
+    "patient_id": "patient_1d2e7b92",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": true,
+    "insurance_id": "plan_765042ce"
+  },
+  {
+    "patient_id": "patient_53a54491",
+    "age_range": "60+",
+    "language": "Spanish",
+    "caregiver": false,
+    "insurance_id": "plan_577fc9c2"
+  },
+  {
+    "patient_id": "patient_1dc2378a",
+    "age_range": "31-45",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_544a5bff"
+  },
+  {
+    "patient_id": "patient_48673fb9",
+    "age_range": "31-45",
+    "language": "English",
+    "caregiver": false,
+    "insurance_id": "plan_cec48fd4"
+  },
+  {
+    "patient_id": "patient_02cb1ca9",
+    "age_range": "60+",
+    "language": "Spanish",
+    "caregiver": true,
+    "insurance_id": "plan_80f33038"
+  }
+]

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synthetic Dataset Viewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>Synthetic Dataset Viewer</h1>
+        <p class="subtitle">
+          Browse every JSON file in the dataset with quick filters and preview.
+        </p>
+      </div>
+      <div class="header-actions">
+        <button id="reloadBtn" type="button">Reload manifest</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="summary-panel">
+        <h2>Dataset Summary</h2>
+        <div id="summaryGrid" class="summary-grid"></div>
+      </section>
+
+      <section class="browser-panel">
+        <div class="controls">
+          <label>
+            Category
+            <select id="categorySelect"></select>
+          </label>
+          <label>
+            Search files
+            <input id="searchInput" type="search" placeholder="Filter by name" />
+          </label>
+        </div>
+        <div class="file-list" id="fileList"></div>
+      </section>
+
+      <section class="viewer-panel">
+        <div class="viewer-header">
+          <h2 id="fileTitle">Select a file</h2>
+          <div class="viewer-actions">
+            <button id="copyBtn" type="button">Copy JSON</button>
+          </div>
+        </div>
+        <pre id="jsonViewer" class="json-viewer">No file loaded yet.</pre>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      Run a local server from the repo root:
+      <code>python -m http.server</code> then open
+      <code>http://localhost:8000/ui/</code>.
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

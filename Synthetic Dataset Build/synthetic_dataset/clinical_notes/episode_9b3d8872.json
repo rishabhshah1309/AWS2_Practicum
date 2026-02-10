@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_9b3d8872",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "omeprazole",
+    "amoxicillin"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

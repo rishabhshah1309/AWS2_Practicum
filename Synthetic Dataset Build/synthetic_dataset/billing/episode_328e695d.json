@@ -1,0 +1,26 @@
+[
+  {
+    "episode_id": "episode_328e695d",
+    "bill_type": "Imaging",
+    "amount": 780.0,
+    "date_of_service": "2025-11-21"
+  },
+  {
+    "episode_id": "episode_328e695d",
+    "bill_type": "Laboratory",
+    "amount": 615.48,
+    "date_of_service": "2025-11-21"
+  },
+  {
+    "episode_id": "episode_328e695d",
+    "bill_type": "Facility Fee",
+    "amount": 154.93,
+    "date_of_service": "2025-11-21"
+  },
+  {
+    "episode_id": "episode_328e695d",
+    "bill_type": "Professional Fee",
+    "amount": 450.16,
+    "date_of_service": "2025-11-21"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_b5b84c0f",
+    "bill_type": "Anesthesia",
+    "amount": 703.92,
+    "date_of_service": "2025-11-17"
+  },
+  {
+    "episode_id": "episode_b5b84c0f",
+    "bill_type": "Imaging",
+    "amount": 119.26,
+    "date_of_service": "2025-11-17"
+  },
+  {
+    "episode_id": "episode_b5b84c0f",
+    "bill_type": "Professional Fee",
+    "amount": 1154.13,
+    "date_of_service": "2025-11-17"
+  }
+]

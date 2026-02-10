@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_fcfdf40f",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "lisinopril",
+    "acetaminophen"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

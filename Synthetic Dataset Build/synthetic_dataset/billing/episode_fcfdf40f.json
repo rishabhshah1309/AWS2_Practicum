@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_fcfdf40f",
+    "bill_type": "Facility Fee",
+    "amount": 447.54,
+    "date_of_service": "2026-02-01"
+  },
+  {
+    "episode_id": "episode_fcfdf40f",
+    "bill_type": "Imaging",
+    "amount": 954.39,
+    "date_of_service": "2026-02-01"
+  }
+]

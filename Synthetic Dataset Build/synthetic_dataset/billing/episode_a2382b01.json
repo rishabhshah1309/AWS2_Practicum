@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_a2382b01",
+    "bill_type": "Imaging",
+    "amount": 196.38,
+    "date_of_service": "2025-11-12"
+  },
+  {
+    "episode_id": "episode_a2382b01",
+    "bill_type": "Laboratory",
+    "amount": 533.51,
+    "date_of_service": "2025-11-12"
+  },
+  {
+    "episode_id": "episode_a2382b01",
+    "bill_type": "Anesthesia",
+    "amount": 1131.42,
+    "date_of_service": "2025-11-12"
+  }
+]

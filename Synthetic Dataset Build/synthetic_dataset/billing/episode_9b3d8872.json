@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_9b3d8872",
+    "bill_type": "Facility Fee",
+    "amount": 677.43,
+    "date_of_service": "2025-11-15"
+  },
+  {
+    "episode_id": "episode_9b3d8872",
+    "bill_type": "Professional Fee",
+    "amount": 1009.78,
+    "date_of_service": "2025-11-15"
+  }
+]

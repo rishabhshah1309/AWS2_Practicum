@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_e52e2d77",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "lisinopril",
+    "amoxicillin"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "episode_id": "episode_30d1e9f8",
+    "bill_type": "Facility Fee",
+    "amount": 225.77,
+    "date_of_service": "2025-12-11"
+  },
+  {
+    "episode_id": "episode_30d1e9f8",
+    "bill_type": "Laboratory",
+    "amount": 926.89,
+    "date_of_service": "2025-12-11"
+  },
+  {
+    "episode_id": "episode_30d1e9f8",
+    "bill_type": "Imaging",
+    "amount": 670.29,
+    "date_of_service": "2025-12-11"
+  },
+  {
+    "episode_id": "episode_30d1e9f8",
+    "bill_type": "Anesthesia",
+    "amount": 945.42,
+    "date_of_service": "2025-12-11"
+  }
+]

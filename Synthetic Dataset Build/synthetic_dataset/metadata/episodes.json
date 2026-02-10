@@ -1,0 +1,359 @@
+[
+  {
+    "episode_id": "episode_cd148949",
+    "patient_id": "patient_10786715",
+    "provider_id": "prov_0465fdad",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-16"
+  },
+  {
+    "episode_id": "episode_30d1e9f8",
+    "patient_id": "patient_8f9cc34c",
+    "provider_id": "prov_26c607a6",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-12-11"
+  },
+  {
+    "episode_id": "episode_e52e2d77",
+    "patient_id": "patient_476fa124",
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-04"
+  },
+  {
+    "episode_id": "episode_05007dd9",
+    "patient_id": "patient_476fa124",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-28"
+  },
+  {
+    "episode_id": "episode_ddbe6b5e",
+    "patient_id": "patient_476fa124",
+    "provider_id": "prov_bf9b3fe9",
+    "specialty": "Dermatology",
+    "visit_date": "2025-11-13"
+  },
+  {
+    "episode_id": "episode_5ad822fd",
+    "patient_id": "patient_59e4b178",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-16"
+  },
+  {
+    "episode_id": "episode_94a397b7",
+    "patient_id": "patient_b69bf7d9",
+    "provider_id": "prov_029c6bfa",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-14"
+  },
+  {
+    "episode_id": "episode_43dfbd64",
+    "patient_id": "patient_b69bf7d9",
+    "provider_id": "prov_7f019537",
+    "specialty": "Dermatology",
+    "visit_date": "2025-12-23"
+  },
+  {
+    "episode_id": "episode_7d6b4ea0",
+    "patient_id": "patient_2aac6a18",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-29"
+  },
+  {
+    "episode_id": "episode_dffd193e",
+    "patient_id": "patient_2aac6a18",
+    "provider_id": "prov_a0f2c206",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-17"
+  },
+  {
+    "episode_id": "episode_bb35ffc0",
+    "patient_id": "patient_2aac6a18",
+    "provider_id": "prov_7f019537",
+    "specialty": "Dermatology",
+    "visit_date": "2025-11-27"
+  },
+  {
+    "episode_id": "episode_27d8e6e0",
+    "patient_id": "patient_9160b88e",
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "visit_date": "2025-11-22"
+  },
+  {
+    "episode_id": "episode_8033195f",
+    "patient_id": "patient_9160b88e",
+    "provider_id": "prov_e7ee118a",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-12-26"
+  },
+  {
+    "episode_id": "episode_f913567c",
+    "patient_id": "patient_9160b88e",
+    "provider_id": "prov_7f019537",
+    "specialty": "Dermatology",
+    "visit_date": "2025-12-28"
+  },
+  {
+    "episode_id": "episode_af5f06ac",
+    "patient_id": "patient_bc3d2446",
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "visit_date": "2025-11-09"
+  },
+  {
+    "episode_id": "episode_9b3d8872",
+    "patient_id": "patient_bc3d2446",
+    "provider_id": "prov_0465fdad",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-15"
+  },
+  {
+    "episode_id": "episode_31db8dbf",
+    "patient_id": "patient_f67aa742",
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "visit_date": "2026-01-19"
+  },
+  {
+    "episode_id": "episode_977e4612",
+    "patient_id": "patient_6b4bca10",
+    "provider_id": "prov_a0f2c206",
+    "specialty": "Cardiology",
+    "visit_date": "2026-01-13"
+  },
+  {
+    "episode_id": "episode_703678be",
+    "patient_id": "patient_6b4bca10",
+    "provider_id": "prov_f5265c3a",
+    "specialty": "Gastroenterology",
+    "visit_date": "2025-12-08"
+  },
+  {
+    "episode_id": "episode_fcfdf40f",
+    "patient_id": "patient_911306b2",
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "visit_date": "2026-02-01"
+  },
+  {
+    "episode_id": "episode_35da570a",
+    "patient_id": "patient_911306b2",
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-19"
+  },
+  {
+    "episode_id": "episode_a2382b01",
+    "patient_id": "patient_911306b2",
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-12"
+  },
+  {
+    "episode_id": "episode_51c690c6",
+    "patient_id": "patient_03e1ce94",
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-24"
+  },
+  {
+    "episode_id": "episode_d4cc4163",
+    "patient_id": "patient_73869b8f",
+    "provider_id": "prov_029c6bfa",
+    "specialty": "Cardiology",
+    "visit_date": "2026-01-14"
+  },
+  {
+    "episode_id": "episode_aa64fcc7",
+    "patient_id": "patient_73869b8f",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-12-08"
+  },
+  {
+    "episode_id": "episode_1a7829ff",
+    "patient_id": "patient_dcb3baec",
+    "provider_id": "prov_0465fdad",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-07"
+  },
+  {
+    "episode_id": "episode_3733de10",
+    "patient_id": "patient_1e1a0a04",
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-26"
+  },
+  {
+    "episode_id": "episode_ec7c61b8",
+    "patient_id": "patient_1e1a0a04",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-12-30"
+  },
+  {
+    "episode_id": "episode_05a010a9",
+    "patient_id": "patient_1e1a0a04",
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "visit_date": "2026-01-27"
+  },
+  {
+    "episode_id": "episode_1656943a",
+    "patient_id": "patient_daf87a11",
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-05"
+  },
+  {
+    "episode_id": "episode_71a76d44",
+    "patient_id": "patient_daf87a11",
+    "provider_id": "prov_029c6bfa",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-15"
+  },
+  {
+    "episode_id": "episode_3b16f412",
+    "patient_id": "patient_daf87a11",
+    "provider_id": "prov_a0f2c206",
+    "specialty": "Cardiology",
+    "visit_date": "2026-01-02"
+  },
+  {
+    "episode_id": "episode_15546a01",
+    "patient_id": "patient_c96068a7",
+    "provider_id": "prov_bf9b3fe9",
+    "specialty": "Dermatology",
+    "visit_date": "2026-01-27"
+  },
+  {
+    "episode_id": "episode_718f6c71",
+    "patient_id": "patient_cfa21f24",
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-21"
+  },
+  {
+    "episode_id": "episode_17567bd8",
+    "patient_id": "patient_cfa21f24",
+    "provider_id": "prov_029c6bfa",
+    "specialty": "Cardiology",
+    "visit_date": "2025-12-28"
+  },
+  {
+    "episode_id": "episode_7df5c7c9",
+    "patient_id": "patient_cfa21f24",
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-15"
+  },
+  {
+    "episode_id": "episode_d073c485",
+    "patient_id": "patient_d4498a97",
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "visit_date": "2025-12-07"
+  },
+  {
+    "episode_id": "episode_d48fb09f",
+    "patient_id": "patient_d4498a97",
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-07"
+  },
+  {
+    "episode_id": "episode_06308073",
+    "patient_id": "patient_5058f862",
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "visit_date": "2025-11-08"
+  },
+  {
+    "episode_id": "episode_cef3a591",
+    "patient_id": "patient_1d2e7b92",
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "visit_date": "2026-01-20"
+  },
+  {
+    "episode_id": "episode_561029d6",
+    "patient_id": "patient_53a54491",
+    "provider_id": "prov_093a4fc2",
+    "specialty": "Gastroenterology",
+    "visit_date": "2026-01-19"
+  },
+  {
+    "episode_id": "episode_de0958ed",
+    "patient_id": "patient_53a54491",
+    "provider_id": "prov_f5265c3a",
+    "specialty": "Gastroenterology",
+    "visit_date": "2025-12-05"
+  },
+  {
+    "episode_id": "episode_b5b84c0f",
+    "patient_id": "patient_53a54491",
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-17"
+  },
+  {
+    "episode_id": "episode_ed9537e3",
+    "patient_id": "patient_1dc2378a",
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "visit_date": "2026-01-02"
+  },
+  {
+    "episode_id": "episode_1d12c201",
+    "patient_id": "patient_1dc2378a",
+    "provider_id": "prov_26c607a6",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-31"
+  },
+  {
+    "episode_id": "episode_ab6dd2b8",
+    "patient_id": "patient_1dc2378a",
+    "provider_id": "prov_26c607a6",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-17"
+  },
+  {
+    "episode_id": "episode_fe14f797",
+    "patient_id": "patient_48673fb9",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-20"
+  },
+  {
+    "episode_id": "episode_328e695d",
+    "patient_id": "patient_48673fb9",
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "visit_date": "2025-11-21"
+  },
+  {
+    "episode_id": "episode_2e3f5a45",
+    "patient_id": "patient_02cb1ca9",
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-15"
+  },
+  {
+    "episode_id": "episode_244caa18",
+    "patient_id": "patient_02cb1ca9",
+    "provider_id": "prov_f5265c3a",
+    "specialty": "Gastroenterology",
+    "visit_date": "2026-02-04"
+  },
+  {
+    "episode_id": "episode_29697f10",
+    "patient_id": "patient_02cb1ca9",
+    "provider_id": "prov_e7ee118a",
+    "specialty": "OB-GYN",
+    "visit_date": "2026-01-29"
+  }
+]

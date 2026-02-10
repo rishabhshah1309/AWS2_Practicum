@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_1d12c201",
+    "bill_type": "Anesthesia",
+    "amount": 181.99,
+    "date_of_service": "2026-01-31"
+  },
+  {
+    "episode_id": "episode_1d12c201",
+    "bill_type": "Professional Fee",
+    "amount": 308.53,
+    "date_of_service": "2026-01-31"
+  },
+  {
+    "episode_id": "episode_1d12c201",
+    "bill_type": "Imaging",
+    "amount": 221.34,
+    "date_of_service": "2026-01-31"
+  }
+]

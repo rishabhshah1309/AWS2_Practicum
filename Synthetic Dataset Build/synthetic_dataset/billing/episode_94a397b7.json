@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_94a397b7",
+    "bill_type": "Imaging",
+    "amount": 801.47,
+    "date_of_service": "2025-12-14"
+  },
+  {
+    "episode_id": "episode_94a397b7",
+    "bill_type": "Facility Fee",
+    "amount": 793.11,
+    "date_of_service": "2025-12-14"
+  },
+  {
+    "episode_id": "episode_94a397b7",
+    "bill_type": "Laboratory",
+    "amount": 119.7,
+    "date_of_service": "2025-12-14"
+  }
+]

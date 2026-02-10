@@ -1,0 +1,137 @@
+[
+  {
+    "provider_id": "prov_a0f2c206",
+    "specialty": "Cardiology",
+    "location": "TX",
+    "in_network_plans": [
+      "plan_e6d163e1",
+      "plan_54c04ba4"
+    ]
+  },
+  {
+    "provider_id": "prov_0ac964a2",
+    "specialty": "OB-GYN",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_ca541a13",
+      "plan_5ceb60bf"
+    ]
+  },
+  {
+    "provider_id": "prov_0465fdad",
+    "specialty": "Cardiology",
+    "location": "TX",
+    "in_network_plans": [
+      "plan_aa0a4a16",
+      "plan_8d74ba9c"
+    ]
+  },
+  {
+    "provider_id": "prov_9d78f91c",
+    "specialty": "Dermatology",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_22b7cc71",
+      "plan_aa163671"
+    ]
+  },
+  {
+    "provider_id": "prov_26c607a6",
+    "specialty": "OB-GYN",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_8aee4327",
+      "plan_78e714e9"
+    ]
+  },
+  {
+    "provider_id": "prov_b91bfc21",
+    "specialty": "Cardiology",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_dd0df2c9",
+      "plan_6079d615"
+    ]
+  },
+  {
+    "provider_id": "prov_b0c7f453",
+    "specialty": "Cardiology",
+    "location": "CA",
+    "in_network_plans": [
+      "plan_52a52a9b",
+      "plan_28ee0a4c"
+    ]
+  },
+  {
+    "provider_id": "prov_e7ee118a",
+    "specialty": "OB-GYN",
+    "location": "TX",
+    "in_network_plans": [
+      "plan_b7c73f7e",
+      "plan_a60079e6"
+    ]
+  },
+  {
+    "provider_id": "prov_093a4fc2",
+    "specialty": "Gastroenterology",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_c3e65e78",
+      "plan_35e1f923"
+    ]
+  },
+  {
+    "provider_id": "prov_492a4773",
+    "specialty": "OB-GYN",
+    "location": "TX",
+    "in_network_plans": [
+      "plan_9d76194b",
+      "plan_f284028f"
+    ]
+  },
+  {
+    "provider_id": "prov_bf9b3fe9",
+    "specialty": "Dermatology",
+    "location": "TX",
+    "in_network_plans": [
+      "plan_ba41a12e",
+      "plan_adfbf0f1"
+    ]
+  },
+  {
+    "provider_id": "prov_7f019537",
+    "specialty": "Dermatology",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_602cb196",
+      "plan_3792be06"
+    ]
+  },
+  {
+    "provider_id": "prov_029c6bfa",
+    "specialty": "Cardiology",
+    "location": "CA",
+    "in_network_plans": [
+      "plan_f3c40f37",
+      "plan_8d0a1a57"
+    ]
+  },
+  {
+    "provider_id": "prov_f5265c3a",
+    "specialty": "Gastroenterology",
+    "location": "NY",
+    "in_network_plans": [
+      "plan_1766e79e",
+      "plan_2c106993"
+    ]
+  },
+  {
+    "provider_id": "prov_e425a4dc",
+    "specialty": "Primary Care",
+    "location": "CA",
+    "in_network_plans": [
+      "plan_4d4f9f7f",
+      "plan_9f20deae"
+    ]
+  }
+]

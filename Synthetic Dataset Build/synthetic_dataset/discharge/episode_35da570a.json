@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_35da570a",
+  "instructions": [
+    "Take medications as prescribed.",
+    "Monitor symptoms daily.",
+    "Avoid strenuous activity for 7 days."
+  ],
+  "red_flags": [
+    "worsening pain",
+    "fever above 101F",
+    "shortness of breath"
+  ]
+}

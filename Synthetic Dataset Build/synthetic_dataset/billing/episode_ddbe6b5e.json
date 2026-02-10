@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_ddbe6b5e",
+    "bill_type": "Facility Fee",
+    "amount": 74.19,
+    "date_of_service": "2025-11-13"
+  },
+  {
+    "episode_id": "episode_ddbe6b5e",
+    "bill_type": "Laboratory",
+    "amount": 687.01,
+    "date_of_service": "2025-11-13"
+  }
+]

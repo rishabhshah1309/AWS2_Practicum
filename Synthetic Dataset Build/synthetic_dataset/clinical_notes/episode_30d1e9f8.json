@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_30d1e9f8",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "ibuprofen",
+    "lisinopril"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

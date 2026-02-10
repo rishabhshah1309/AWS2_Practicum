@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_3b16f412",
+    "bill_type": "Laboratory",
+    "amount": 1010.15,
+    "date_of_service": "2026-01-02"
+  },
+  {
+    "episode_id": "episode_3b16f412",
+    "bill_type": "Imaging",
+    "amount": 590.85,
+    "date_of_service": "2026-01-02"
+  },
+  {
+    "episode_id": "episode_3b16f412",
+    "bill_type": "Professional Fee",
+    "amount": 911.38,
+    "date_of_service": "2026-01-02"
+  }
+]

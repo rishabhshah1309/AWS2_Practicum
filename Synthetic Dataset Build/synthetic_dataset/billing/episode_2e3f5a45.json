@@ -1,0 +1,26 @@
+[
+  {
+    "episode_id": "episode_2e3f5a45",
+    "bill_type": "Facility Fee",
+    "amount": 340.26,
+    "date_of_service": "2026-01-15"
+  },
+  {
+    "episode_id": "episode_2e3f5a45",
+    "bill_type": "Imaging",
+    "amount": 183.31,
+    "date_of_service": "2026-01-15"
+  },
+  {
+    "episode_id": "episode_2e3f5a45",
+    "bill_type": "Anesthesia",
+    "amount": 938.43,
+    "date_of_service": "2026-01-15"
+  },
+  {
+    "episode_id": "episode_2e3f5a45",
+    "bill_type": "Professional Fee",
+    "amount": 1044.65,
+    "date_of_service": "2026-01-15"
+  }
+]

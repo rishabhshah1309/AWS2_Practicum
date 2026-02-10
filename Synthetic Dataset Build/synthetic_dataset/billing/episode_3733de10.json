@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_3733de10",
+    "bill_type": "Laboratory",
+    "amount": 770.76,
+    "date_of_service": "2025-11-26"
+  },
+  {
+    "episode_id": "episode_3733de10",
+    "bill_type": "Imaging",
+    "amount": 365.79,
+    "date_of_service": "2025-11-26"
+  }
+]

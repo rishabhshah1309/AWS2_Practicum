@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_29697f10",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "amoxicillin",
+    "acetaminophen"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

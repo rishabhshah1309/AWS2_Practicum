@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_244caa18",
+    "bill_type": "Anesthesia",
+    "amount": 766.03,
+    "date_of_service": "2026-02-04"
+  },
+  {
+    "episode_id": "episode_244caa18",
+    "bill_type": "Laboratory",
+    "amount": 623.27,
+    "date_of_service": "2026-02-04"
+  }
+]

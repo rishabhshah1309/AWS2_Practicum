@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_ec7c61b8",
+    "bill_type": "Professional Fee",
+    "amount": 490.49,
+    "date_of_service": "2025-12-30"
+  },
+  {
+    "episode_id": "episode_ec7c61b8",
+    "bill_type": "Anesthesia",
+    "amount": 225.73,
+    "date_of_service": "2025-12-30"
+  }
+]

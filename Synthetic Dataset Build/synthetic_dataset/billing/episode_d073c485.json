@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_d073c485",
+    "bill_type": "Professional Fee",
+    "amount": 458.05,
+    "date_of_service": "2025-12-07"
+  },
+  {
+    "episode_id": "episode_d073c485",
+    "bill_type": "Imaging",
+    "amount": 347.11,
+    "date_of_service": "2025-12-07"
+  },
+  {
+    "episode_id": "episode_d073c485",
+    "bill_type": "Facility Fee",
+    "amount": 371.61,
+    "date_of_service": "2025-12-07"
+  }
+]

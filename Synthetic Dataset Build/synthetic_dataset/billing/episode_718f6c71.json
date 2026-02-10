@@ -1,0 +1,20 @@
+[
+  {
+    "episode_id": "episode_718f6c71",
+    "bill_type": "Professional Fee",
+    "amount": 844.21,
+    "date_of_service": "2026-01-21"
+  },
+  {
+    "episode_id": "episode_718f6c71",
+    "bill_type": "Facility Fee",
+    "amount": 771.33,
+    "date_of_service": "2026-01-21"
+  },
+  {
+    "episode_id": "episode_718f6c71",
+    "bill_type": "Laboratory",
+    "amount": 167.19,
+    "date_of_service": "2026-01-21"
+  }
+]

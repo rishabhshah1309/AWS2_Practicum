@@ -1,0 +1,14 @@
+[
+  {
+    "episode_id": "episode_e52e2d77",
+    "bill_type": "Anesthesia",
+    "amount": 148.5,
+    "date_of_service": "2025-12-04"
+  },
+  {
+    "episode_id": "episode_e52e2d77",
+    "bill_type": "Facility Fee",
+    "amount": 608.89,
+    "date_of_service": "2025-12-04"
+  }
+]

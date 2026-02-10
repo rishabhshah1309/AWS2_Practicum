@@ -1,0 +1,13 @@
+{
+  "episode_id": "episode_05007dd9",
+  "assessment": "Symptoms reviewed as documented.",
+  "medications": [
+    "omeprazole",
+    "acetaminophen"
+  ],
+  "tests_ordered": [
+    "blood work",
+    "x-ray"
+  ],
+  "follow_up": "Schedule follow-up in 2 weeks."
+}

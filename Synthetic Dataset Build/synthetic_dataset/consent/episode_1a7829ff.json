@@ -1,0 +1,12 @@
+{
+  "episode_id": "episode_1a7829ff",
+  "document_type": "Procedure Consent",
+  "clauses": [
+    "You may be financially responsible for uncovered services.",
+    "This authorization may be revoked at any time in writing."
+  ],
+  "missing_fields": [
+    "provider signature",
+    "date"
+  ]
+}
