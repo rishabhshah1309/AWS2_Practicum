@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile Summary • Health Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="summary">
+    <div class="grain"></div>
+    <header class="app-header">
+      <div class="logo">
+        <div class="logo-mark">HG</div>
+        <div>
+          <div class="logo-title">Health Guide</div>
+          <div class="logo-sub">Profile Summary</div>
+        </div>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="symptom.html">Symptom Checker</a>
+        <a href="legal.html">Legal Docs</a>
+        <a href="medical.html">Medical Transcription</a>
+        <a class="active" href="summary.html">Profile Summary</a>
+      </nav>
+      <div class="status-pill" id="dataStatus">Loading data...</div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Module 5</p>
+            <h1>Patient Profile Summary</h1>
+            <p class="lede">Overview of next steps and timeline highlights across episodes.</p>
+          </div>
+          <div class="controls">
+            <label>
+              Patient
+              <select id="patientSelect"></select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Next Steps</h3>
+            <div id="nextSteps" class="stack"></div>
+          </div>
+          <div class="card">
+            <h3>Timeline Highlights</h3>
+            <div id="timelineHighlights" class="stack"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Use this summary for care coordination and follow-up planning.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
