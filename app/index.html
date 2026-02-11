@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Health Guide Full Console</title>
+    <title>Health Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-page="home">
     <div class="grain"></div>
     <header class="app-header">
       <div class="logo">
@@ -23,178 +23,76 @@
         </div>
       </div>
       <nav class="top-nav">
-        <a href="#dashboard">Dashboard</a>
-        <a href="#symptom">Symptom Checker</a>
-        <a href="#legal">Legal Docs</a>
-        <a href="#medical">Medical Transcription</a>
-        <a href="#summary">Profile Summary</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="symptom.html">Symptom Checker</a>
+        <a href="legal.html">Legal Docs</a>
+        <a href="medical.html">Medical Transcription</a>
+        <a href="summary.html">Profile Summary</a>
       </nav>
-      <div class="status-pill" id="dataStatus">Loading data...</div>
+      <div class="status-pill" id="dataStatus">Ready</div>
     </header>
 
     <main>
-      <section id="dashboard" class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Module 1</p>
-            <h1>Patient Dashboard & Timeline</h1>
-            <p class="lede">
-              See the full patient journey: symptoms, visits, records, prescriptions, and follow-ups.
-            </p>
-          </div>
-          <div class="controls">
-            <label>
-              Patient
-              <select id="patientSelect"></select>
-            </label>
-            <label>
-              Episode
-              <select id="episodeSelect"></select>
-            </label>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Health Guide</p>
+          <h1>Navigate a complete patient journey.</h1>
+          <p class="lede">
+            Explore every module in a guided, human-friendly experience: patient dashboard,
+            symptom intake, legal document parsing, medical transcription, and next-step planning.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="dashboard.html">Open Dashboard</a>
+            <a class="ghost" href="symptom.html">Start Symptom Checker</a>
           </div>
         </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Patient Snapshot</h3>
-            <div id="patientSnapshot" class="stack"></div>
+        <div class="hero-card">
+          <div class="metric">
+            <span class="metric-label">Modules</span>
+            <span class="metric-value">5</span>
           </div>
-          <div class="card">
-            <h3>Key Metrics</h3>
-            <div id="patientMetrics" class="stack"></div>
+          <div class="metric">
+            <span class="metric-label">Data Source</span>
+            <span class="metric-value mono">outputs/</span>
           </div>
-          <div class="card">
-            <h3>Prescriptions & Notes</h3>
-            <div id="patientMeds" class="stack"></div>
-          </div>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-header">
-            <h3>Timeline of Clinical Visits</h3>
-            <p>Sorted by visit date, with symptoms and specialty routing.</p>
-          </div>
-          <div id="timelineList" class="timeline-list"></div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Episode Deep Dive</h3>
-            <div id="episodeDive" class="stack"></div>
-          </div>
-          <div class="card">
-            <h3>Episode JSON Output</h3>
-            <pre id="episodeRaw" class="code"></pre>
+          <div class="metric">
+            <span class="metric-label">Mode</span>
+            <span class="metric-value">Prototype</span>
           </div>
         </div>
       </section>
 
-      <section id="symptom" class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Module 2</p>
-            <h2>Symptom Checker (Picklist)</h2>
-            <p class="lede">Select symptoms, severity, and duration to generate guidance.</p>
-          </div>
-        </div>
-
-        <div class="wizard">
-          <div class="wizard-step">
-            <h3>Where does it hurt?</h3>
-            <div class="option-grid" id="locationOptions"></div>
-          </div>
-          <div class="wizard-step">
-            <h3>What does it feel like?</h3>
-            <div class="option-grid" id="painOptions"></div>
-          </div>
-          <div class="wizard-step">
-            <h3>Select symptoms</h3>
-            <div class="pill-grid" id="symptomOptions"></div>
-          </div>
-          <div class="wizard-step">
-            <h3>Severity</h3>
-            <div class="severity-row" id="severityOptions"></div>
-          </div>
-          <div class="wizard-step">
-            <h3>How long has this been going on?</h3>
-            <div class="pill-grid" id="durationOptions"></div>
-          </div>
-          <button id="runSymptom" class="primary">Generate Guidance</button>
-        </div>
-
-        <div class="results" id="symptomResults"></div>
-      </section>
-
-      <section id="legal" class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Module 3</p>
-            <h2>Legal Document Intake</h2>
-            <p class="lede">Upload consent or legal documents for summary and risk highlights.</p>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Upload Legal Document</h3>
-            <input type="file" id="legalUpload" accept=".pdf,.txt,.doc,.docx,.rtf" />
-            <div id="legalUploadMeta" class="stack"></div>
-          </div>
-          <div class="card">
-            <h3>Parsed Summary</h3>
-            <div id="legalParse" class="stack"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="medical" class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Module 4</p>
-            <h2>Medical Data Transcription</h2>
-            <p class="lede">Upload audio or text-based medical notes for transcription.</p>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Upload Medical Data</h3>
-            <input type="file" id="medicalUpload" accept="audio/*,.txt,.md" />
-            <div id="medicalUploadMeta" class="stack"></div>
-          </div>
-          <div class="card">
-            <h3>Transcription Output</h3>
-            <pre id="medicalTranscript" class="code"></pre>
-          </div>
-        </div>
-      </section>
-
-      <section id="summary" class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Module 5</p>
-            <h2>Patient Profile Summary</h2>
-            <p class="lede">Overview of next steps and action items across the timeline.</p>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Next Steps</h3>
-            <div id="nextSteps" class="stack"></div>
-          </div>
-          <div class="card">
-            <h3>Timeline Highlights</h3>
-            <div id="timelineHighlights" class="stack"></div>
-          </div>
-        </div>
+      <section class="grid-3">
+        <a class="card link-card" href="dashboard.html">
+          <h3>Dashboard Overview</h3>
+          <p class="muted">Timeline, symptoms, visits, prescriptions, and episode deep dives.</p>
+          <span class="tag">Module 1</span>
+        </a>
+        <a class="card link-card" href="symptom.html">
+          <h3>Symptom Checker</h3>
+          <p class="muted">Picklist-based intake with guidance and specialty routing.</p>
+          <span class="tag">Module 2</span>
+        </a>
+        <a class="card link-card" href="legal.html">
+          <h3>Legal Documents</h3>
+          <p class="muted">Upload consent docs and surface key clauses.</p>
+          <span class="tag">Module 3</span>
+        </a>
+        <a class="card link-card" href="medical.html">
+          <h3>Medical Transcription</h3>
+          <p class="muted">Upload audio/notes and review transcription output.</p>
+          <span class="tag">Module 4</span>
+        </a>
+        <a class="card link-card" href="summary.html">
+          <h3>Profile Summary</h3>
+          <p class="muted">Next steps and timeline highlights for care coordination.</p>
+          <span class="tag">Module 5</span>
+        </a>
       </section>
     </main>
 
     <footer class="footer">
-      <p>Run the local pipeline and refresh the page to see updated outputs.</p>
+      <p>Run the local pipeline and refresh to see updated outputs.</p>
     </footer>
-
-    <script src="app.js"></script>
   </body>
 </html>

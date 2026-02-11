@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard • Health Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="grain"></div>
+    <header class="app-header">
+      <div class="logo">
+        <div class="logo-mark">HG</div>
+        <div>
+          <div class="logo-title">Health Guide</div>
+          <div class="logo-sub">Patient Dashboard</div>
+        </div>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="symptom.html">Symptom Checker</a>
+        <a href="legal.html">Legal Docs</a>
+        <a href="medical.html">Medical Transcription</a>
+        <a href="summary.html">Profile Summary</a>
+      </nav>
+      <div class="status-pill" id="dataStatus">Loading data...</div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Module 1</p>
+            <h1>Patient Dashboard & Timeline</h1>
+            <p class="lede">Full patient journey: symptoms, visits, records, and prescriptions.</p>
+          </div>
+          <div class="controls">
+            <label>
+              Patient
+              <select id="patientSelect"></select>
+            </label>
+            <label>
+              Episode
+              <select id="episodeSelect"></select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Patient Snapshot</h3>
+            <div id="patientSnapshot" class="stack"></div>
+          </div>
+          <div class="card">
+            <h3>Key Metrics</h3>
+            <div id="patientMetrics" class="stack"></div>
+          </div>
+          <div class="card">
+            <h3>Prescriptions & Notes</h3>
+            <div id="patientMeds" class="stack"></div>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-header">
+            <h3>Timeline of Clinical Visits</h3>
+            <p>Sorted by visit date, with symptoms and specialty routing.</p>
+          </div>
+          <div id="timelineList" class="timeline-list"></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Episode Deep Dive</h3>
+            <div id="episodeDive" class="stack"></div>
+          </div>
+          <div class="card">
+            <h3>Episode JSON Output</h3>
+            <pre id="episodeRaw" class="code"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Tip: select a patient to explore their episode timeline.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -93,6 +93,7 @@ body {
   font-weight: 500;
 }
 
+.top-nav a.active,
 .top-nav a:hover {
   color: var(--accent-dark);
 }
@@ -141,7 +142,47 @@ h1, h2, h3 {
 
 .muted {
   color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: 32px;
+  padding: 32px 0 48px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.hero-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 18px;
+}
+
+.metric-label {
+  display: block;
   font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.metric-value.mono {
+  font-family: var(--mono);
+  font-size: 1rem;
 }
 
 .controls {
@@ -184,6 +225,17 @@ select, input[type="file"] {
   padding: 20px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
+}
+
+.link-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(39, 35, 29, 0.18);
 }
 
 .stack {
@@ -247,10 +299,20 @@ select, input[type="file"] {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .primary:hover {
   transform: translateY(-2px);
+}
+
+.ghost {
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .wizard {
@@ -353,5 +415,14 @@ select, input[type="file"] {
 
   .top-nav {
     justify-content: flex-start;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
